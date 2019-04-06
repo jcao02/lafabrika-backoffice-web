@@ -7,5 +7,5 @@ import { AbstractValidator } from './abstract-validator';
 export abstract class AbstractValidatorComponent extends Vue {
   @Prop() validators!: AbstractValidator[];
 
-  abstract validate(): void;
+  abstract validate(value: any): void;
 }
