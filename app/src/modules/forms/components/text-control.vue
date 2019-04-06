@@ -3,8 +3,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
-import { AbstractControl } from '../interfaces/abstract-control';
+import { AbstractControlComponent } from '../interfaces/abstract-control-component';
 
-export default class TextControl extends AbstractControl {}
+export default class TextControl extends AbstractControlComponent {}
 </script>
