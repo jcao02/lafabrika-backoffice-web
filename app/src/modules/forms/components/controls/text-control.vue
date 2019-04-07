@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts">
-import { AbstractControlComponent } from '../interfaces/abstract-control-component';
+import { AbstractControlComponent } from './abstract-control-component';
 
 export default class TextControl extends AbstractControlComponent {}
 </script>

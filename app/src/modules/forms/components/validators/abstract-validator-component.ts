@@ -1,6 +1,6 @@
 import { Prop, Vue } from 'vue-property-decorator';
-import { AbstractValidator } from './abstract-validator';
-import { ErrorMessagesDictionary } from './error-messages-dictionary';
+import { AbstractValidator } from '../../classes/validators/abstract-validator';
+import { ErrorMessagesDictionary } from '../../classes/validators/error-messages-dictionary';
 
 /**
  * Represents a component that holds a control

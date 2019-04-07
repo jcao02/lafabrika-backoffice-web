@@ -1,4 +1,4 @@
-import { AbstractValidationError } from '../interfaces/validation-error';
+import { AbstractValidationError } from './validation-error';
 
 export class RequiredValidationError implements AbstractValidationError {
   readonly name = 'required';

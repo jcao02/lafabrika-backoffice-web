@@ -1,4 +1,4 @@
-import { AbstractValidator } from '../interfaces/abstract-validator';
+import { AbstractValidator } from './abstract-validator';
 import { RequiredValidator } from './required-validator';
 
 export class ValidatorFactory {
