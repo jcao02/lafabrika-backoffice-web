@@ -4,6 +4,6 @@ import { RequiredValidationError } from './required-validator-error';
 export class RequiredValidator implements AbstractValidator {
 
   validate(value: any): RequiredValidationError | null {
-    return value === '' || value === null ? new RequiredValidationError() : null;
+    return value === '' || value === null || value === undefined ? new RequiredValidationError() : null;
   }
 }
