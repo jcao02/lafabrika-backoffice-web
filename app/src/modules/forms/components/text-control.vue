@@ -4,6 +4,7 @@
     :error-messages="this.errormessages"
     :value="this.value"
     @input="this.input"
+    @blur="this.blur"
   ></v-text-field>
 </template>
 

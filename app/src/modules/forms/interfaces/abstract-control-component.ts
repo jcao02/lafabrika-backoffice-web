@@ -3,7 +3,7 @@ import { Prop, Vue, Component, Emit } from 'vue-property-decorator';
 /**
  * Represents a component that holds a control
  */
-@Component({})
+@Component
 export class AbstractControlComponent extends Vue {
   @Prop() error!: boolean;
   @Prop() errormessages!: string[];
@@ -15,6 +15,15 @@ export class AbstractControlComponent extends Vue {
    */
   @Emit()
   protected input(value: any): any {
+    return value;
+  }
+
+  /**
+   * Emits 'blur' event
+   * @param value to be emitted
+   */
+  @Emit()
+  protected blur(value: FocusEvent): FocusEvent {
     return value;
   }
 }
