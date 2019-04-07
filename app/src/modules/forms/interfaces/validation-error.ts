@@ -3,5 +3,5 @@
  * field name
  */
 export interface AbstractValidationError {
-  fieldName: string;
+  readonly name: string;
 }
