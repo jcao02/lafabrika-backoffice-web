@@ -1,7 +1,6 @@
 <template>
   <span>
-    <!-- This component only accepts AbstractControlComponents -->
-    <slot :error="this.error" :errormessages="this.errormessages" :validate="this.validate"></slot>
+    <slot :errormessages="errormessages" :error="error" :validatefn="validate"></slot>
   </span>
 </template>
 
