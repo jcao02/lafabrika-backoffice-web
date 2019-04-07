@@ -1,5 +1,10 @@
 <template>
-  <v-text-field :value="this.value" @input="this.emitInput"></v-text-field>
+  <v-text-field
+    :error="this.error"
+    :error-messages="this.errormessages"
+    :value="this.value"
+    @input="this.emitInput"
+  ></v-text-field>
 </template>
 
 <script lang="ts">

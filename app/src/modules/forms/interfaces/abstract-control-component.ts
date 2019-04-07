@@ -5,8 +5,8 @@ import { Prop, Vue, Component } from 'vue-property-decorator';
  */
 @Component({})
 export class AbstractControlComponent extends Vue {
-  @Prop(Boolean) error!: boolean;
-  @Prop(Array(String)) errorMessages!: string[];
+  @Prop() error!: boolean;
+  @Prop() errormessages!: string[];
   @Prop() value: any;
 
   /**
