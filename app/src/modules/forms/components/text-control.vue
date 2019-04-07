@@ -3,7 +3,7 @@
     :error="this.error"
     :error-messages="this.errormessages"
     :value="this.value"
-    @input="this.emitInput"
+    @input="this.input"
   ></v-text-field>
 </template>
 

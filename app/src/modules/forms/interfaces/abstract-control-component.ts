@@ -1,4 +1,4 @@
-import { Prop, Vue, Component } from 'vue-property-decorator';
+import { Prop, Vue, Component, Emit } from 'vue-property-decorator';
 
 /**
  * Represents a component that holds a control
@@ -13,7 +13,8 @@ export class AbstractControlComponent extends Vue {
    * Emits 'input' event
    * @param value to be emitted
    */
-  protected emitInput(value: any): void {
-    this.$emit('input', value);
+  @Emit()
+  protected input(value: any): any {
+    return value;
   }
 }
