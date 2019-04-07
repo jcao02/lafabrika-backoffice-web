@@ -1,7 +1,7 @@
 <template>
   <span>
     <!-- This component only accepts AbstractControlComponents -->
-    <slot @input="this.validate" :error="this.error" :errormessages="this.errormessages"></slot>
+    <slot :error="this.error" :errormessages="this.errormessages" :validate="this.validate"></slot>
   </span>
 </template>
 
