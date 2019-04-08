@@ -1,5 +1,5 @@
-import { AbstractValidator } from './abstract-validator';
-import { RequiredValidator } from './required-validator';
+import { AbstractValidator } from '../validators/abstract-validator';
+import { RequiredValidator } from '../validators/required-validator';
 
 export class ValidatorFactory {
   static createValidator(type: string): AbstractValidator {

@@ -3,7 +3,7 @@ import { shallowMount, mount } from '@vue/test-utils';
 
 import SingleValueValidator from './single-value-validator.vue';
 import { RequiredValidator } from '../../classes/validators/required-validator';
-import { RequiredValidationError } from '../../classes/validators/required-validation-error';
+import { RequiredValidationError } from '../../classes/errors/required-validation-error';
 
 describe('SingleValueValidator.vue', () => {
   it('should mount the component', () => {

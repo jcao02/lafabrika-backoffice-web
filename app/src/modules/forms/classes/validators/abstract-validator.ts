@@ -1,4 +1,4 @@
-import { AbstractValidationError } from './validation-error';
+import { AbstractValidationError } from '../errors/validation-error';
 
 /**
  * Interface to validate a value
