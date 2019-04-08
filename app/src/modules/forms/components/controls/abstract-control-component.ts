@@ -6,7 +6,7 @@ import { Prop, Vue, Component, Emit } from 'vue-property-decorator';
 @Component
 export class AbstractControlComponent extends Vue {
   @Prop() error!: boolean;
-  @Prop() errormessages!: string[];
+  @Prop() errorMessages!: string[];
   @Prop() value: any;
 
   /**
@@ -14,16 +14,14 @@ export class AbstractControlComponent extends Vue {
    * @param value to be emitted
    */
   @Emit()
-  protected input(value: any): any {
-    return value;
-  }
+  // tslint:disable-next-line: no-empty
+  protected input(value: any): void {}
 
   /**
    * Emits 'blur' event
    * @param value to be emitted
    */
   @Emit()
-  protected blur(value: FocusEvent): FocusEvent {
-    return value;
-  }
+  // tslint:disable-next-line: no-empty
+  protected blur(value: FocusEvent): void {}
 }

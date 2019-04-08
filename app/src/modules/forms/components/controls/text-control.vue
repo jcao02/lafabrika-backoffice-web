@@ -1,10 +1,10 @@
 <template>
   <v-text-field
-    :error="this.error"
-    :error-messages="this.errormessages"
-    :value="this.value"
-    @input="this.input"
-    @blur="this.blur"
+    :error="error"
+    :error-messages="errorMessages"
+    :value="value"
+    @input="input"
+    @blur="blur"
   ></v-text-field>
 </template>
 
