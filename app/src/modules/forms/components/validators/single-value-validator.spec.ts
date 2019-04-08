@@ -50,7 +50,7 @@ describe('SingleValueValidator.vue', () => {
       // tslint:disable-next-line: no-unused-expression
       expect(wrapper.vm.$data.errorMessages).to.be.empty;
     });
-    it('should set error and messages when validation is broken', () => {
+    it('should set error and messages when validation is not passed', () => {
       const validator = new RequiredValidator();
       const error = new RequiredValidationError();
       const errorsDictionary = { [error.name]: 'My Error' };
@@ -65,6 +65,22 @@ describe('SingleValueValidator.vue', () => {
       expect(wrapper.vm.$data.error).to.be.true;
       // tslint:disable-next-line: no-unused-expression
       expect(wrapper.vm.$data.errorMessages).to.eql([errorsDictionary[error.name]]);
+    });
+    it('should set error to false and empty messages when validation is passed', () => {
+      const validator = new RequiredValidator();
+      const error = new RequiredValidationError();
+      const errorsDictionary = { [error.name]: 'My Error' };
+      const wrapper = mount(SingleValueValidator);
+      wrapper.setProps({ validators: [validator], errorsDictionary });
+
+
+      const value = 'some value';
+      ( wrapper.vm as any ).validate(value);
+
+      // tslint:disable-next-line: no-unused-expression
+      expect(wrapper.vm.$data.error).to.be.false;
+      // tslint:disable-next-line: no-unused-expression
+      expect(wrapper.vm.$data.errorMessages).to.be.empty;
     });
   });
 });
