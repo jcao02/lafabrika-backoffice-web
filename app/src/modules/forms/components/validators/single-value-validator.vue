@@ -1,6 +1,6 @@
 <template>
   <span>
-    <slot :errormessages="errormessages" :error="error" :validatefn="validate"></slot>
+    <slot :errorMessages="errorMessages" :error="error" :validatefn="validate"></slot>
   </span>
 </template>
 
@@ -12,7 +12,7 @@ import { AbstractValidationError } from '../../classes/validators/validation-err
 @Component
 export default class SingleValueValidator extends AbstractValidatorComponent {
   error: boolean = false;
-  errormessages: string[] = [];
+  errorMessages: string[] = [];
 
   /**
    * Validates the innerValue of the TextControl
@@ -27,7 +27,7 @@ export default class SingleValueValidator extends AbstractValidatorComponent {
     }, [] as AbstractValidationError[]);
 
     this.error = errors.length > 0;
-    this.errormessages = errors.map(e => this.errorsDictionary[e.name] ? this.errorsDictionary[e.name] : this.errorsDictionary.default);
+    this.errorMessages = errors.map(e => this.errorsDictionary[e.name] ? this.errorsDictionary[e.name] : this.errorsDictionary.default);
   }
 }
 </script>
