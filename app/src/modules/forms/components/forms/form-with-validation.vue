@@ -16,7 +16,7 @@ export default class FormWithValidation extends Vue implements Observer {
   validationMap: Record<number, boolean> = {};
 
   update(value: AbstractValidatorComponent): void {
-    this.validationMap = { ...this.validationMap, [value.vid]: value.$data.error };
+    this.validationMap = { ...this.validationMap, [value.vid]: value.error };
   }
 
   get valid() {
