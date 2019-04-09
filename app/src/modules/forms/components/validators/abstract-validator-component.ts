@@ -1,4 +1,4 @@
-import { Prop, Vue } from 'vue-property-decorator';
+import { Prop, Vue, Component, Inject } from 'vue-property-decorator';
 import { AbstractValidator } from '../../classes/validators/abstract-validator';
 import { ErrorMessagesDictionary } from '../../classes/error-messages/error-messages-dictionary';
 import { Observable } from '@/modules/shared/classes/observable';
@@ -7,6 +7,8 @@ import { Observer } from '@/modules/shared/classes/observer';
 /**
  * Represents a component that validates inner controls
  */
+// @ts-ignore
+@Component
 export abstract class AbstractValidatorComponent extends Vue implements Observable {
   static validatorCounter = 0;
   error: boolean = false;
@@ -16,11 +18,17 @@ export abstract class AbstractValidatorComponent extends Vue implements Observab
 
   @Prop() validators!: AbstractValidator[];
   @Prop() errorsDictionary!: ErrorMessagesDictionary;
+  @Inject({ default: null }) readonly vObserver!: Observer;
 
   abstract validate(value: any): void;
 
   created() {
     this.vid = AbstractValidatorComponent.validatorCounter++;
+    this.subscribe(this.vObserver);
+  }
+
+  destroyed() {
+    this.unsubscribe(this.vObserver);
   }
 
   subscribe(obs: Observer): void {
