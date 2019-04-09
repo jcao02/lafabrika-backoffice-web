@@ -5,7 +5,7 @@ import { Observable } from '@/modules/shared/classes/observable';
 import { Observer } from '@/modules/shared/classes/observer';
 
 /**
- * Represents a component that holds a control
+ * Represents a component that validates inner controls
  */
 export abstract class AbstractValidatorComponent extends Vue implements Observable {
   static validatorCounter = 0;
