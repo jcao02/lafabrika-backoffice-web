@@ -5,15 +5,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Inject } from 'vue-property-decorator';
+import { Vue, Component } from 'vue-property-decorator';
 import { AbstractValidatorComponent } from './abstract-validator-component';
 import { AbstractValidationError } from '../../classes/errors/validation-error';
-import { Observer } from '../../../shared/classes/observer';
 
 @Component
 export default class SingleValueValidator extends AbstractValidatorComponent {
-  @Inject({ default: null }) readonly vObserver!: Observer;
-
   /**
    * Validates the innerValue of the TextControl
    */
@@ -33,13 +30,5 @@ export default class SingleValueValidator extends AbstractValidatorComponent {
     this.notify();
   }
 
-  created() {
-    super.created();
-    this.subscribe(this.vObserver);
-  }
-
-  destroyed() {
-    this.unsubscribe(this.vObserver);
-  }
 }
 </script>
