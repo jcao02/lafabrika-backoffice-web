@@ -22,6 +22,11 @@ This component handles an input's validation. The input must be an `AbstractCont
 - **validators (AbstractValidator[])**: Validators to use to validate the input.
 - **errorsDictionary (ErrorMessagesDictionary)**: A dictionary with human-readable error messages.
 
+### Scoped Slot
+- **error (boolean)**: True if the control has a validation error.
+- **errorMessages (string[])**: Array of error messages (if any).
+- **validatefn (Function)**: Validate function with signature `validate(value: any): void`.
+
 ### Usage
 
 Template:
@@ -36,6 +41,15 @@ Template:
     />
   </SingleValueValidator>
 ```
+
+## FormWithValidation
+Handles validation state of inner `AbstractValidationComponent`s
+
+### Events
+It emits all `form` events.
+
+### Scoped Slot
+- **valid (boolean)**: True when none of the inner validators has errors.
 
 # Validators
 ## RequiredValidator
