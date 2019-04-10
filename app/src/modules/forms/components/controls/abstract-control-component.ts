@@ -20,22 +20,10 @@ export class AbstractControlComponent extends Vue implements Observable {
   };
   observers: Observer[] = [];
 
-  get touched() {
-    return this.state.touched;
-  }
-
-  get dirty() {
-    return this.state.dirty;
-  }
-
   created() {
     if (this.iObserver) {
       this.subscribe(this.iObserver);
     }
-  }
-
-  updated() {
-    this.state.value = this.value;
   }
 
   destroyed() {
@@ -68,9 +56,13 @@ export class AbstractControlComponent extends Vue implements Observable {
   @Emit()
   // tslint:disable-next-line: no-empty
   protected input(value: any): void {
-    if (this.value !== value && !this.dirty) {
-      this.state = { ...this.state, dirty: true };
+    let newState: Partial<ControlState> = { value };
+    if (this.value !== value && !this.state.dirty) {
+      newState = { ...newState, dirty: true };
     }
+
+    // Update state
+    this.state = { ...this.state, ...newState };
 
     // Notify to observers everytime user changes input
     this.notify();
@@ -83,7 +75,7 @@ export class AbstractControlComponent extends Vue implements Observable {
   @Emit()
   // tslint:disable-next-line: no-empty
   protected blur(value: FocusEvent): void {
-    if (!this.touched) {
+    if (!this.state.touched) {
       this.state = { ...this.state, touched: true };
     }
 

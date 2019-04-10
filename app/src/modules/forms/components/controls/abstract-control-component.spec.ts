@@ -17,7 +17,7 @@ describe('AbstractControlComponent', () => {
       ( wrapper.vm as any ).input(diffValue);
 
       // tslint:disable-next-line: no-unused-expression
-      expect(wrapper.vm.dirty).to.be.true;
+      expect(wrapper.vm.state.dirty).to.be.true;
     });
     it('should not set dirty to true if the input does not change its value', () => {
       const wrapper = shallowMount(AbstractControlComponent);
@@ -27,7 +27,7 @@ describe('AbstractControlComponent', () => {
       ( wrapper.vm as any ).input(value);
 
       // tslint:disable-next-line: no-unused-expression
-      expect(wrapper.vm.dirty).to.be.false;
+      expect(wrapper.vm.state.dirty).to.be.false;
 
     });
     it('should set touched to true if the input emits blur', () => {
@@ -36,39 +36,32 @@ describe('AbstractControlComponent', () => {
       ( wrapper.vm as any ).blur(new Event('blur'));
 
       // tslint:disable-next-line: no-unused-expression
-      expect(wrapper.vm.touched).to.be.true;
+      expect(wrapper.vm.state.touched).to.be.true;
     });
     it('should not set touched to true if the input does not emit blur', () => {
       const wrapper = shallowMount(AbstractControlComponent);
       // tslint:disable-next-line: no-unused-expression
-      expect(wrapper.vm.touched).to.be.false;
+      expect(wrapper.vm.state.touched).to.be.false;
     });
 
-    it('should set the value in the state when value prop changes', () => {
+    it('should set the value in the state input is emitted', () => {
       const wrapper = shallowMount(AbstractControlComponent);
       const value = 'myValue';
       wrapper.setProps({ value });
+
+      const newValue = 'newValue';
+      ( wrapper.vm as any ).input(newValue);
       // tslint:disable-next-line: no-unused-expression
-      expect(wrapper.vm.state.value).to.eql(value);
+      expect(wrapper.vm.state.value).to.eql(newValue);
     });
   });
   describe('subscribe()', () => {
     it('should subscribe observer on creation', () => {
       const iObserver = { update() { /** NOOP */ } };
-      const parent = {
-        name: 'validator-parent',
-        template: `
-          <AbstractControlComponent >
-          </AbstractControlComponent>
-        `,
-        provide: { iObserver },
-        components: { AbstractControlComponent }
-      };
-
-      const wrapper = mount(parent);
-      const child = wrapper.find(AbstractControlComponent).vm;
-
-      expect(( child as any ).observers).to.eql([iObserver]);
+      const wrapper = shallowMount(AbstractControlComponent, {
+        provide: { iObserver }
+      });
+      expect(wrapper.vm.observers).to.eql([iObserver]);
     });
     it('should not call subscribe if observer is null', () => {
       const wrapper = shallowMount(AbstractControlComponent);
@@ -78,21 +71,11 @@ describe('AbstractControlComponent', () => {
   describe('unsubscribe()', () => {
     it('should unsubscribe observer on component destroy', () => {
       const iObserver = { update() { /** NOOP */ } };
-      const parent = {
-        name: 'validator-parent',
-        template: `
-          <AbstractControlComponent >
-          </AbstractControlComponent>
-        `,
-        provide: { iObserver },
-        components: { AbstractControlComponent }
-      };
-
-      const wrapper = mount(parent);
-      const child = wrapper.find(AbstractControlComponent);
-      child.destroy();
-
-      expect(( child.vm as any ).observers).to.eql([]);
+      const wrapper = shallowMount(AbstractControlComponent, {
+        provide: { iObserver }
+      });
+      wrapper.destroy();
+      expect(wrapper.vm.observers).to.eql([]);
     });
     it('should not call unsubscribe if observer is null', () => {
       const wrapper = shallowMount(AbstractControlComponent);
@@ -107,44 +90,26 @@ describe('AbstractControlComponent', () => {
     it('should notify on input event', () => {
       const update = fake();
       const iObserver = { update };
-      const parent = {
-        name: 'validator-parent',
-        template: `
-          <AbstractControlComponent >
-          </AbstractControlComponent>
-        `,
-        provide: { iObserver },
-        components: { AbstractControlComponent }
-      };
-
-      const wrapper = mount(parent);
-      const child = wrapper.find(AbstractControlComponent);
+      const wrapper = shallowMount(AbstractControlComponent, {
+        provide: { iObserver }
+      });
 
       const value = 'myValue';
-      ( child.vm as any ).input(value);
+      ( wrapper.vm as any ).input(value);
 
-      expect(update.calledWith(( child.vm as any ).state));
+      expect(update.calledWith(wrapper.vm.state));
     });
     it('should notify on blur event', () => {
       const update = fake();
       const iObserver = { update };
-      const parent = {
-        name: 'validator-parent',
-        template: `
-          <AbstractControlComponent >
-          </AbstractControlComponent>
-        `,
-        provide: { iObserver },
-        components: { AbstractControlComponent }
-      };
-
-      const wrapper = mount(parent);
-      const child = wrapper.find(AbstractControlComponent);
+      const wrapper = shallowMount(AbstractControlComponent, {
+        provide: { iObserver }
+      });
 
       const value = 'myValue';
-      ( child.vm as any ).blur(value);
+      ( wrapper.vm as any ).blur(value);
 
-      expect(update.calledWith(( child.vm as any ).state));
+      expect(update.calledWith(wrapper.vm.state));
     });
   });
 });
