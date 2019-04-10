@@ -44,7 +44,7 @@ describe('AbstractControlComponent', () => {
       expect(wrapper.vm.state.touched).to.be.false;
     });
 
-    it('should set the value in the state input is emitted', () => {
+    it('should set the value in the state when input is emitted', () => {
       const wrapper = shallowMount(AbstractControlComponent);
       const value = 'myValue';
       wrapper.setProps({ value });
