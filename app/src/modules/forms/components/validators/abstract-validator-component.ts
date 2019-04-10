@@ -28,12 +28,15 @@ export abstract class AbstractValidatorComponent extends Vue implements Observab
    * Validates the value provided
    * @param value to validate
    */
-  abstract validate(value: any): void;
+  abstract doValidate(value: any): void;
   /**
    * Returns true if the validation should be performed
    */
   abstract shouldValidate(): boolean;
 
+  /**
+   * HOOK: Component creation
+   */
   created() {
     this.vid = AbstractValidatorComponent.validatorCounter++;
     if (this.vObserver) {
@@ -41,9 +44,21 @@ export abstract class AbstractValidatorComponent extends Vue implements Observab
     }
   }
 
+  /**
+   * HOOK: Component destruction
+   */
   destroyed() {
     if (this.vObserver) {
       this.unsubscribe(this.vObserver);
+    }
+  }
+
+  /**
+   * Validates the state value if should
+   */
+  validate() {
+    if (!!this.controlState && this.shouldValidate()) {
+      this.doValidate(this.controlState.value);
     }
   }
 
@@ -66,6 +81,6 @@ export abstract class AbstractValidatorComponent extends Vue implements Observab
 
   update(state: ControlState): void {
     this.controlState = state;
-    this.validate(state.value);
+    this.validate();
   }
 }
