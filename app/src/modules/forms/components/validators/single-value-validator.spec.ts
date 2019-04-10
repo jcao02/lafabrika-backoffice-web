@@ -62,9 +62,8 @@ describe('SingleValueValidator.vue', () => {
       const wrapper = mount(SingleValueValidator);
       wrapper.setProps({ validators: [validator], errorsDictionary });
 
-      const value = '';
-      wrapper.setData({ controlState: { ...controlState, value } });
-      ( wrapper.vm as any ).validate(value);
+      wrapper.setData({ controlState: { ...controlState, value: '' } });
+      ( wrapper.vm as any ).validate();
 
       // tslint:disable-next-line: no-unused-expression
       expect(wrapper.vm.$data.error).to.be.true;
@@ -79,9 +78,7 @@ describe('SingleValueValidator.vue', () => {
       wrapper.setProps({ validators: [validator], errorsDictionary });
       wrapper.setData({ controlState });
 
-
-      const value = 'some value';
-      ( wrapper.vm as any ).validate(value);
+      ( wrapper.vm as any ).validate();
 
       // tslint:disable-next-line: no-unused-expression
       expect(wrapper.vm.$data.error).to.be.false;
