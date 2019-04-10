@@ -18,17 +18,21 @@ export abstract class AbstractValidatorComponent extends Vue implements Observab
 
   @Prop() validators!: AbstractValidator[];
   @Prop() errorsDictionary!: ErrorMessagesDictionary;
-  @Inject({ default: null }) readonly vObserver!: Observer;
+  @Inject({ default: null }) readonly vObserver!: Observer | null;
 
   abstract validate(value: any): void;
 
   created() {
     this.vid = AbstractValidatorComponent.validatorCounter++;
-    this.subscribe(this.vObserver);
+    if (this.vObserver) {
+      this.subscribe(this.vObserver);
+    }
   }
 
   destroyed() {
-    this.unsubscribe(this.vObserver);
+    if (this.vObserver) {
+      this.unsubscribe(this.vObserver);
+    }
   }
 
   subscribe(obs: Observer): void {
