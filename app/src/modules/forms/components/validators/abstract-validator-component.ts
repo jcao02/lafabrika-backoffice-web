@@ -24,7 +24,15 @@ export abstract class AbstractValidatorComponent extends Vue implements Observab
   @Inject({ default: null }) readonly vObserver!: Observer | null;
   @Provide() iObserver: Observer = this;
 
+  /**
+   * Validates the value provided
+   * @param value to validate
+   */
   abstract validate(value: any): void;
+  /**
+   * Returns true if the validation should be performed
+   */
+  abstract shouldValidate(): boolean;
 
   created() {
     this.vid = AbstractValidatorComponent.validatorCounter++;
@@ -56,7 +64,8 @@ export abstract class AbstractValidatorComponent extends Vue implements Observab
     });
   }
 
-  update(value: ControlState): void {
-    this.controlState = value;
+  update(state: ControlState): void {
+    this.controlState = state;
+    this.validate(state.value);
   }
 }
