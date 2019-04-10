@@ -5,15 +5,12 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Vue, Component } from 'vue-property-decorator';
 import { AbstractValidatorComponent } from './abstract-validator-component';
 import { AbstractValidationError } from '../../classes/errors/validation-error';
 
 @Component
 export default class SingleValueValidator extends AbstractValidatorComponent {
-  error: boolean = false;
-  errorMessages: string[] = [];
-
   /**
    * Validates the innerValue of the TextControl
    */
@@ -28,6 +25,10 @@ export default class SingleValueValidator extends AbstractValidatorComponent {
 
     this.error = errors.length > 0;
     this.errorMessages = errors.map(e => this.errorsDictionary[e.name] ? this.errorsDictionary[e.name] : this.errorsDictionary.default);
+
+    // Notify all the observers of validation performed
+    this.notify();
   }
+
 }
 </script>
