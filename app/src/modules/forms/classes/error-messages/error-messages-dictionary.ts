@@ -1,5 +1,5 @@
-import { ValidationErrorName } from '../errors/error-names';
+import { ValidatorName } from '../validators/validator-names';
 
-export interface ErrorMessagesDictionary extends Record<ValidationErrorName, string> {
+export interface ErrorMessagesDictionary extends Record<ValidatorName, string> {
   default: string;
 }

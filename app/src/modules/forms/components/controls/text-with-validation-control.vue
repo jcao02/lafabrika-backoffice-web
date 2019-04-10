@@ -14,6 +14,7 @@ import { Prop, Vue, Component } from 'vue-property-decorator';
 import { AbstractValidator } from '../../classes/validators/abstract-validator';
 import { ValidatorFactory } from '../../classes/factories/validator-factory';
 import { defaultDictionary } from '../../classes/error-messages/default-error-messages';
+import { ValidatorName } from '../../classes/validators/validator-names';
 
 import SingleValueValidator from '../validators/single-value-validator.vue';
 import TextControl from './text-control.vue';
@@ -30,7 +31,7 @@ export default class TextWithValidationControl extends Vue {
   errorsDictionary = defaultDictionary;
 
   get validatorObjects(): AbstractValidator[] {
-    return this.validators.split('|').map(v => ValidatorFactory.createValidator(v));
+    return this.validators.split('|').map(v => ValidatorFactory.createValidator(v as ValidatorName));
   }
 }
 </script>
