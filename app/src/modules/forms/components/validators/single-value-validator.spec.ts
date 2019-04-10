@@ -41,6 +41,11 @@ describe('SingleValueValidator.vue', () => {
   });
 
   describe('validate()', () => {
+    const controlState = {
+      touched: true,
+      dirty: true,
+      value: 'myValue'
+    };
     it('should set errors to false and empty messages when no validators', () => {
       const wrapper = mount(SingleValueValidator);
       wrapper.setProps({ validators: [] });
@@ -57,8 +62,8 @@ describe('SingleValueValidator.vue', () => {
       const wrapper = mount(SingleValueValidator);
       wrapper.setProps({ validators: [validator], errorsDictionary });
 
-
       const value = '';
+      wrapper.setData({ controlState: { ...controlState, value } });
       ( wrapper.vm as any ).validate(value);
 
       // tslint:disable-next-line: no-unused-expression
@@ -72,6 +77,7 @@ describe('SingleValueValidator.vue', () => {
       const errorsDictionary = { [error.name]: 'My Error' };
       const wrapper = mount(SingleValueValidator);
       wrapper.setProps({ validators: [validator], errorsDictionary });
+      wrapper.setData({ controlState });
 
 
       const value = 'some value';
