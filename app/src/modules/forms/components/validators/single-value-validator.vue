@@ -1,6 +1,6 @@
 <template>
   <span>
-    <slot :errorMessages="errorMessages" :error="error" :validatefn="validate"></slot>
+    <slot :errorMessages="errorMessages" :error="error" :validatefn="doValidate"></slot>
   </span>
 </template>
 
@@ -11,10 +11,19 @@ import { AbstractValidationError } from '../../classes/errors/validation-error';
 
 @Component
 export default class SingleValueValidator extends AbstractValidatorComponent {
+
   /**
-   * Validates the innerValue of the TextControl
+   * Returns true if the validation should be performed
+   * By default, it will start validation if the control state is touched
    */
-  validate(value: any): void {
+  shouldValidate(): boolean {
+    return this.controlState!.touched;
+  }
+  /**
+   * Validates the value provided
+   * @param value to validate
+   */
+  doValidate(value: any): void {
     const errors = this.validators.reduce((acc, validator) => {
       const errorOrNull = validator.validate(value);
       if (errorOrNull) {

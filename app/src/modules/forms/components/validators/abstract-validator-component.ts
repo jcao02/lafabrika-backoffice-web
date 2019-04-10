@@ -1,27 +1,42 @@
-import { Prop, Vue, Component, Inject } from 'vue-property-decorator';
+import { Prop, Vue, Component, Inject, Provide } from 'vue-property-decorator';
 import { AbstractValidator } from '../../classes/validators/abstract-validator';
 import { ErrorMessagesDictionary } from '../../classes/error-messages/error-messages-dictionary';
 import { Observable } from '@/modules/shared/classes/observable';
 import { Observer } from '@/modules/shared/classes/observer';
+import { ControlState } from '../../classes/controls/control-state';
 
 /**
  * Represents a component that validates inner controls
  */
 // @ts-ignore
 @Component
-export abstract class AbstractValidatorComponent extends Vue implements Observable {
+export abstract class AbstractValidatorComponent extends Vue implements Observable, Observer {
   static validatorCounter = 0;
   error: boolean = false;
   errorMessages: string[] = [];
   observers: Observer[] = [];
   vid!: number;
+  innerValue: any;
+  controlState: ControlState | null = null;
 
   @Prop() validators!: AbstractValidator[];
   @Prop() errorsDictionary!: ErrorMessagesDictionary;
   @Inject({ default: null }) readonly vObserver!: Observer | null;
+  @Provide() iObserver: Observer = this;
 
-  abstract validate(value: any): void;
+  /**
+   * Validates the value provided
+   * @param value to validate
+   */
+  abstract doValidate(value: any): void;
+  /**
+   * Returns true if the validation should be performed
+   */
+  abstract shouldValidate(): boolean;
 
+  /**
+   * HOOK: Component creation
+   */
   created() {
     this.vid = AbstractValidatorComponent.validatorCounter++;
     if (this.vObserver) {
@@ -29,9 +44,21 @@ export abstract class AbstractValidatorComponent extends Vue implements Observab
     }
   }
 
+  /**
+   * HOOK: Component destruction
+   */
   destroyed() {
     if (this.vObserver) {
       this.unsubscribe(this.vObserver);
+    }
+  }
+
+  /**
+   * Validates the state value if should
+   */
+  validate() {
+    if (!!this.controlState && this.shouldValidate()) {
+      this.doValidate(this.controlState.value);
     }
   }
 
@@ -50,5 +77,10 @@ export abstract class AbstractValidatorComponent extends Vue implements Observab
     this.observers.forEach((obs: Observer) => {
       obs.update(this);
     });
+  }
+
+  update(state: ControlState): void {
+    this.controlState = state;
+    this.validate();
   }
 }
