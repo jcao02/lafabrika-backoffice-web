@@ -1,20 +1,20 @@
 <template>
 <v-container>
-  <v-layout row justify-center>
-    <v-flex xs4>
-      <!-- Card containing form -->
-      <v-card>
-        <!-- Center card content -->
-        <v-layout column justify-center align-center>
-          <!-- Card title -->
-          <v-card-title primary-title>
-            <h1>Iniciar Sesión</h1>
-          </v-card-title>
-          <!-- Form -->
-          <AuthenticationForm />
-        </v-layout>
-      </v-card>
-    </v-flex>
+  <v-layout column justify-center align-center>
+    <!-- Logo image -->
+    <v-img width="160" :src="require('@/assets/logo.png')"></v-img>
+    <!-- Card containing form -->
+    <v-card width="320">
+      <!-- Center card content -->
+      <v-layout column justify-center align-center>
+        <!-- Card title -->
+        <v-card-title primary-title>
+          <h1>Iniciar Sesión</h1>
+        </v-card-title>
+        <!-- Form -->
+        <AuthenticationForm />
+      </v-layout>
+    </v-card>
   </v-layout>
 </v-container>
 </template>
