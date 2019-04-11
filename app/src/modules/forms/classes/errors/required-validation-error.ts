@@ -1,6 +1,6 @@
 import { AbstractValidationError } from './validation-error';
-import { ValidationErrorName } from './error-names';
+import { ValidatorName } from '../validators/validator-names';
 
 export class RequiredValidationError implements AbstractValidationError {
-  readonly name = ValidationErrorName.REQUIRED;
+  readonly name = ValidatorName.REQUIRED;
 }
