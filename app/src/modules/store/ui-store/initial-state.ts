@@ -1,4 +1,4 @@
-import { UIState } from '../types/ui-state';
+import { UIState } from './state';
 
 export const uiState: UIState = {
   currentUser: null
