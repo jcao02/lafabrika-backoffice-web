@@ -1,8 +1,8 @@
 <template>
-  <FormWithValidation>
+  <FormWithValidation v-slot="{ valid }">
     <TextWithValidationControl validators="required"/>
     <TextWithValidationControl validators="required"/>
-    <v-btn color="info" type="submit">Entrar</v-btn>
+    <v-btn :disabled="!valid" color="info" type="submit">Entrar</v-btn>
   </FormWithValidation>
 </template>
 
