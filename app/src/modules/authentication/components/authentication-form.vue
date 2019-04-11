@@ -1,7 +1,7 @@
 <template>
   <FormWithValidation @submit.prevent="onSubmit" v-slot="{ valid }">
-    <TextWithValidationControl validators="required" v-model="form.email"/>
-    <TextWithValidationControl validators="required" v-model="form.password"/>
+    <TextWithValidationControl validators="required" type="email" v-model="form.email" label="Correo electrónico"/>
+    <TextWithValidationControl validators="required" type="password" v-model="form.password" label="Contraseña"/>
     <v-btn :disabled="!valid" color="info" type="submit">Entrar</v-btn>
   </FormWithValidation>
 </template>
