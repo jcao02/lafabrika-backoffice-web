@@ -6,7 +6,6 @@
   </FormWithValidation>
 </template>
 
-
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import FormWithValidation from '../../forms/components/forms/form-with-validation.vue';
