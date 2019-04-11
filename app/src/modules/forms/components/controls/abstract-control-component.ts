@@ -2,15 +2,20 @@ import { Prop, Vue, Component, Emit, Inject } from 'vue-property-decorator';
 import { ControlState } from '../../classes/controls/control-state';
 import { Observable } from '@/modules/shared/classes/observable';
 import { Observer } from '@/modules/shared/classes/observer';
+import { Control } from '../../classes/controls/control';
 
 /**
  * Represents a component that holds a control
  */
 @Component
-export class AbstractControlComponent extends Vue implements Observable {
+export class AbstractControlComponent extends Vue implements Observable, Control {
   @Prop() error!: boolean;
   @Prop() errorMessages!: string[];
   @Prop() value: any;
+  @Prop() label!: string;
+  @Prop() type!: string;
+  @Prop() placeholder!: string;
+
   @Inject({ default: null }) iObserver!: Observer | null;
 
   state: ControlState = {
@@ -55,7 +60,7 @@ export class AbstractControlComponent extends Vue implements Observable {
    */
   @Emit()
   // tslint:disable-next-line: no-empty
-  protected input(value: any): void {
+  input(value: any): void {
     let newState: Partial<ControlState> = { value };
     if (this.value !== value && !this.state.dirty) {
       newState = { ...newState, dirty: true };
@@ -74,7 +79,7 @@ export class AbstractControlComponent extends Vue implements Observable {
    */
   @Emit()
   // tslint:disable-next-line: no-empty
-  protected blur(value: FocusEvent): void {
+  blur(value: FocusEvent): void {
     if (!this.state.touched) {
       this.state = { ...this.state, touched: true };
     }

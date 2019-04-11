@@ -3,6 +3,9 @@
     :error="error"
     :error-messages="errorMessages"
     :value="value"
+    :label="label"
+    :type="type"
+    :placeholder="placeholder"
     @input="input"
     @blur="blur"
   ></v-text-field>
