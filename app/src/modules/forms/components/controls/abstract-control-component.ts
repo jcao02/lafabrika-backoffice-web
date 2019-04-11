@@ -11,6 +11,10 @@ export class AbstractControlComponent extends Vue implements Observable {
   @Prop() error!: boolean;
   @Prop() errorMessages!: string[];
   @Prop() value: any;
+  @Prop() label!: string;
+  @Prop() type!: string;
+  @Prop() placeholder!: string;
+
   @Inject({ default: null }) iObserver!: Observer | null;
 
   state: ControlState = {
