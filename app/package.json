@@ -9,6 +9,7 @@
     "test:unit": "vue-cli-service test:unit 'src/**/*.spec.ts'"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "core-js": "^2.6.5",
     "vue": "^2.6.6",
     "vue-class-component": "^6.0.0",
@@ -18,6 +19,7 @@
     "vuex": "^3.0.1"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/chai": "^4.1.0",
     "@types/mocha": "^5.2.4",
     "@types/sinon": "^7.0.11",
