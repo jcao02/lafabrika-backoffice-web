@@ -15,7 +15,7 @@ import TextWithValidationControl from '../../forms/components/controls/text-with
   components: {
     FormWithValidation,
     TextWithValidationControl
-  },
+  }
 })
 export default class AuthenticationForm extends Vue {}
 </script>

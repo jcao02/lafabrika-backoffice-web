@@ -5,9 +5,9 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Provide } from "vue-property-decorator";
+import { Component, Vue, Provide } from 'vue-property-decorator';
 import { Observer } from '../../../shared/classes/observer';
-import { AbstractValidatorComponent } from "../validators/abstract-validator-component";
+import { AbstractValidatorComponent } from '../validators/abstract-validator-component';
 
 @Component
 export default class FormWithValidation extends Vue implements Observer {

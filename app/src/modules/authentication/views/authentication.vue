@@ -26,7 +26,7 @@ import AuthenticationForm from '../components/authentication-form.vue';
 @Component({
   components: {
     AuthenticationForm
-  },
+  }
 })
 export default class Authentication extends Vue {}
 </script>
