@@ -4,6 +4,9 @@
       :value="value"
       :error="error"
       :errorMessages="errorMessages"
+      :label="label"
+      :type="type"
+      :placeholder="placeholder"
       v-on="$listeners"
     />
   </SingleValueValidator>
@@ -28,6 +31,9 @@ import TextControl from './text-control.vue';
 export default class TextWithValidationControl extends Vue {
   @Prop() value: any;
   @Prop() validators!: string;
+  @Prop() label!: string;
+  @Prop() type!: string;
+  @Prop() placeholder!: string;
   errorsDictionary = defaultDictionary;
 
   get validatorObjects(): AbstractValidator[] {
