@@ -2,7 +2,7 @@
 <v-container>
   <v-layout column justify-center align-center align-content-center>
     <!-- Logo image -->
-    <v-img width="160" :src="require('@/assets/logo.png')"></v-img>
+    <v-img class="logo" width="160" :src="require('@/assets/logo.png')"></v-img>
     <!-- Card containing form -->
     <v-card class="card" width="400">
       <!-- Center card content -->
@@ -36,9 +36,13 @@ export default class Authentication extends Vue {}
 
 <style scoped>
 .card {
+  margin-top: 32px;
   padding-bottom: 32px;
 }
 .form-container {
   padding: 0 32px;
+}
+.logo {
+  margin-top: 24px;
 }
 </style>
