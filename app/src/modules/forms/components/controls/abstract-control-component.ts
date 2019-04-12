@@ -1,7 +1,7 @@
 import { Prop, Vue, Component, Emit, Inject } from 'vue-property-decorator';
 import { ControlState } from '../../classes/controls/control-state';
-import { Observable } from '@/modules/shared/classes/observable';
-import { Observer } from '@/modules/shared/classes/observer';
+import { Observable } from '@/modules/shared/classes/observables/observable';
+import { Observer } from '@/modules/shared/classes/observables/observer';
 import { Control } from '../../classes/controls/control';
 
 /**
