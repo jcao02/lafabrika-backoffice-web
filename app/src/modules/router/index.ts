@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 import Authentication from './modules/authentication/views/authentication.vue';
 import Home from './modules/home/views/home.vue';
-import { CurrentUserManager } from '../shared/classes/state/current-user-manager';
+import { notSignedIn } from './guards';
 
 Vue.use(Router);
 
@@ -20,15 +20,7 @@ export default new Router({
       path: '/auth',
       name: 'authentication',
       component: Authentication,
-      beforeEnter: (to, from, next) => {
-        const cuManager = new CurrentUserManager();
-
-        if (cuManager.isSignedIn()) {
-          next(false);
-        } else  {
-          next();
-        }
-      }
+      beforeEnter: notSignedIn
     }
   ]
 });
