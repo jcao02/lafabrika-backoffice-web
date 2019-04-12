@@ -55,14 +55,27 @@ export default class AuthenticationForm extends mixins(TokenAuthenticationManage
         this.setCurrentUser({ userId: userOrNull.id });
 
         this.$router.push({ path: '/' });
+      } else {
+        const errorMsg = 'Algo inesperado ocurrió, vuelve a intentar más tarde';
+        this.setError(errorMsg);
       }
     } catch (err) {
       const { response } = err;
-      this.generalError = true;
-      this.generalErrorMsg = response.status === 401
+      const errorMsg = response.status === 401
         ? 'Combinación usuario/contraseña incorrecta'
         : `Hubo un error en el servidor (${response.status})`;
+
+      this.setError(errorMsg);
     }
   }
+
+  /**
+   * Sets a general error with message
+   */
+  private setError(msg: string) {
+    this.generalError = true;
+    this.generalErrorMsg = msg;
+  }
+
 }
 </script>
