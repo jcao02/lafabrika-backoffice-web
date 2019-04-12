@@ -3,7 +3,7 @@
     <v-alert :value="generalError" type="error">{{ generalErrorMsg }}</v-alert>
     <TextWithValidationControl validators="required" type="email" v-model="form.email" label="Correo electrónico"/>
     <TextWithValidationControl validators="required" type="password" v-model="form.password" label="Contraseña"/>
-    <v-btn :disabled="!valid" color="info" type="submit">Entrar</v-btn>
+    <v-btn class="submit-btn" :disabled="!valid" color="#5B788E" dark type="submit">Entrar</v-btn>
   </FormWithValidation>
 </template>
 
@@ -24,8 +24,8 @@ import FormWithValidation from '../../forms/components/forms/form-with-validatio
 import TextWithValidationControl from '../../forms/components/controls/text-with-validation-control.vue';
 
 // Mutations
-import { SET_CURRENT_USER } from '../../store/ui-store/mutations';
-import { ADD_USERS } from '../../store/data-store/mutations';
+import { SET_CURRENT_USER, SetCurrentUserPayload } from '../../store/ui-store/mutations';
+import { ADD_USERS, AddUsersPayload } from '../../store/data-store/mutations';
 
 @Component({
   components: {
@@ -34,8 +34,8 @@ import { ADD_USERS } from '../../store/data-store/mutations';
   }
 })
 export default class AuthenticationForm extends mixins(TokenAuthenticationManager, TokenManager) {
-  @Mutation(SET_CURRENT_USER) setCurrentUser: any;
-  @Mutation(ADD_USERS) addUsers: any;
+  @Mutation(SET_CURRENT_USER) setCurrentUser!: (payload: SetCurrentUserPayload) => void;
+  @Mutation(ADD_USERS) addUsers!: (payload: AddUsersPayload) => void;
   form: AuthenticationPayload = {
     email: '',
     password: ''
@@ -80,3 +80,10 @@ export default class AuthenticationForm extends mixins(TokenAuthenticationManage
 
 }
 </script>
+
+<style scoped>
+.submit-btn {
+  width: 100%;
+  margin: 16px 0 0 0;
+}
+</style>

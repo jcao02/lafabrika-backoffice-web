@@ -26,9 +26,8 @@ export class TokenManager extends Vue {
 
   /**
    * Removes token from cookies
-   * @param token to be removed
    */
-  removeToken(token: string) {
+  removeToken() {
     remove(TOKEN_KEY);
   }
 
