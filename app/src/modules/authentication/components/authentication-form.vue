@@ -24,8 +24,8 @@ import FormWithValidation from '../../forms/components/forms/form-with-validatio
 import TextWithValidationControl from '../../forms/components/controls/text-with-validation-control.vue';
 
 // Mutations
-import { SET_CURRENT_USER } from '../../store/ui-store/mutations';
-import { ADD_USERS } from '../../store/data-store/mutations';
+import { SET_CURRENT_USER, SetCurrentUserPayload } from '../../store/ui-store/mutations';
+import { ADD_USERS, AddUsersPayload } from '../../store/data-store/mutations';
 
 @Component({
   components: {
@@ -34,8 +34,8 @@ import { ADD_USERS } from '../../store/data-store/mutations';
   }
 })
 export default class AuthenticationForm extends mixins(TokenAuthenticationManager, TokenManager) {
-  @Mutation(SET_CURRENT_USER) setCurrentUser: any;
-  @Mutation(ADD_USERS) addUsers: any;
+  @Mutation(SET_CURRENT_USER) setCurrentUser!: (payload: SetCurrentUserPayload) => void;
+  @Mutation(ADD_USERS) addUsers!: (payload: AddUsersPayload) => void;
   form: AuthenticationPayload = {
     email: '',
     password: ''
