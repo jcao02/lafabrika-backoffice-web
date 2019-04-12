@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 import Authentication from './modules/authentication/views/authentication.vue';
 import Home from './modules/home/views/home.vue';
-import { CurrentUserManager } from './modules/shared/classes/state/current-user-manager';
+import { CurrentUserManager } from '../shared/classes/state/current-user-manager';
 
 Vue.use(Router);
 
