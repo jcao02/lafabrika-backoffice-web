@@ -3,13 +3,11 @@ import { DataState } from './state';
 import { RootState } from '../state';
 import { ADD_USERS, addUsers } from './mutations';
 import { getUserById } from './getters';
+import { dataState } from './initial-state';
 
-export const state: DataState = {
-  users: {}
-};
 
 export const dataStore: Module<DataState, RootState> = {
-  state,
+  state: dataState,
   mutations: {
     [ADD_USERS]: addUsers
   },
