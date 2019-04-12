@@ -42,9 +42,11 @@ export default class TextWithValidationControl extends Vue implements Control {
   }
 
   @Emit()
+  // tslint:disable-next-line: no-empty
   input(value: any): void {}
 
   @Emit()
+  // tslint:disable-next-line: no-empty
   blur(value: FocusEvent): void {}
 }
 </script>
