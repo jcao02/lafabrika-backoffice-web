@@ -53,6 +53,8 @@ export default class AuthenticationForm extends mixins(TokenAuthenticationManage
       if (userOrNull) {
         this.addUsers({ users: [userOrNull] });
         this.setCurrentUser({ userId: userOrNull.id });
+
+        this.$router.push({ path: '/' });
       }
     } catch (err) {
       const { response } = err;
