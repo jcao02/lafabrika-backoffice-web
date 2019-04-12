@@ -8,6 +8,7 @@
 
 <script lang="ts">
 import Component, { mixins } from 'vue-class-component';
+import { Mutation } from 'vuex-class';
 
 // Helper classes
 import { AuthenticationPayload } from '../classes/authentication-payload';
@@ -15,10 +16,15 @@ import { NetworkRequester } from '../../shared/classes/http/network-requester';
 
 // Mixins
 import { TokenAuthenticationManager } from '../mixins/token-authentication-manager';
+import { TokenManager } from '../mixins/token-manager';
 
 // Components
 import FormWithValidation from '../../forms/components/forms/form-with-validation.vue';
 import TextWithValidationControl from '../../forms/components/controls/text-with-validation-control.vue';
+
+// Mutations
+import { SET_CURRENT_USER } from '../../store/ui-store/mutations';
+import { ADD_USERS } from '../../store/data-store/mutations';
 
 @Component({
   components: {
@@ -26,7 +32,9 @@ import TextWithValidationControl from '../../forms/components/controls/text-with
     TextWithValidationControl
   }
 })
-export default class AuthenticationForm extends mixins(TokenAuthenticationManager) {
+export default class AuthenticationForm extends mixins(TokenAuthenticationManager, TokenManager) {
+  @Mutation(SET_CURRENT_USER) setCurrentUser: any;
+  @Mutation(ADD_USERS) addUsers: any;
   form: AuthenticationPayload = {
     email: '',
     password: ''
@@ -35,8 +43,14 @@ export default class AuthenticationForm extends mixins(TokenAuthenticationManage
   async onSubmit(event: Event) {
     const { email, password } = this.form;
     const res = await this.authenticate(this.form, { baseURL: process.env.VUE_APP_AUTH_BASE_URL });
-
-    // Do something with res
+    if (res.status === 201) {
+      const { token } = res.data;
+      const userOrNull = this.decode(token);
+      if (userOrNull) {
+        this.addUsers({ users: [userOrNull] });
+        this.setCurrentUser({ userId: userOrNull.id });
+      }
+    }
   }
 }
 </script>
