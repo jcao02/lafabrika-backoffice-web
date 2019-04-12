@@ -1,5 +1,6 @@
 <template>
   <FormWithValidation @submit.prevent="onSubmit" v-slot="{ valid }">
+    <v-alert :value="generalError" type="error">{{ generalErrorMsg }}</v-alert>
     <TextWithValidationControl validators="required" type="email" v-model="form.email" label="Correo electrónico"/>
     <TextWithValidationControl validators="required" type="password" v-model="form.password" label="Contraseña"/>
     <v-btn :disabled="!valid" color="info" type="submit">Entrar</v-btn>
@@ -40,16 +41,25 @@ export default class AuthenticationForm extends mixins(TokenAuthenticationManage
     password: ''
   };
 
+  generalError = false;
+  generalErrorMsg = '';
+
   async onSubmit(event: Event) {
     const { email, password } = this.form;
-    const res = await this.authenticate(this.form, { baseURL: process.env.VUE_APP_AUTH_BASE_URL });
-    if (res.status === 201) {
+    try {
+      const res = await this.authenticate(this.form, { baseURL: process.env.VUE_APP_AUTH_BASE_URL });
       const { token } = res.data;
       const userOrNull = this.decode(token);
       if (userOrNull) {
         this.addUsers({ users: [userOrNull] });
         this.setCurrentUser({ userId: userOrNull.id });
       }
+    } catch (err) {
+      const { response } = err;
+      this.generalError = true;
+      this.generalErrorMsg = response.status === 401
+        ? 'Combinación usuario/contraseña incorrecta'
+        : `Hubo un error en el servidor (${response.status})`;
     }
   }
 }
