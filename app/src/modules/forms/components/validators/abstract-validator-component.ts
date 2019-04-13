@@ -16,8 +16,12 @@ export abstract class AbstractValidatorComponent extends Vue implements Observab
   errorMessages: string[] = [];
   observers: Observer[] = [];
   vid!: number;
-  innerValue: any;
-  controlState: ControlState | null = null;
+  controlState: ControlState = {
+    dirty: false,
+    touched: false,
+    value: null
+  };
+  forceValidationFlag = false;
 
   @Prop() validators!: AbstractValidator[];
   @Prop() errorsDictionary!: ErrorMessagesDictionary;
@@ -58,7 +62,7 @@ export abstract class AbstractValidatorComponent extends Vue implements Observab
    * Validates the state value if should
    */
   validate() {
-    if (!!this.controlState && this.shouldValidate()) {
+    if (this.shouldValidate() || this.forceValidationFlag) {
       this.doValidate(this.controlState.value);
     }
   }
@@ -83,5 +87,9 @@ export abstract class AbstractValidatorComponent extends Vue implements Observab
   update(state: ControlState): void {
     this.controlState = state;
     this.validate();
+  }
+
+  forceValidation() {
+    this.forceValidationFlag = true;
   }
 }

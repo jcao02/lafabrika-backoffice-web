@@ -45,11 +45,11 @@ describe('FormWithValidation.vue', () => {
   describe('validate()', () => {
     it('should call validate in all inner validators and return result', () => {
       const vid = 1;
-      const doValidate = sinon.stub();
+      const validate = sinon.stub();
       const error = false;
       const validator: SingleValueValidator = shallowMount(SingleValueValidator, {
         data: () => ({ vid, error }),
-        methods: { doValidate }
+        methods: { validate }
       }).vm;
       const form: FormWithValidation = shallowMount(FormWithValidation, {
         data: () => ({ validatorsMap: { [vid]: validator} }
@@ -59,7 +59,7 @@ describe('FormWithValidation.vue', () => {
       const result = ( form as any ).validate();
       expect(result).to.eql(expected);
       // tslint:disable-next-line: no-unused-expression
-      expect(doValidate.called).to.be.true;
+      expect(validate.called).to.be.true;
     });
   });
 });
