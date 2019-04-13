@@ -13,14 +13,14 @@ import { AbstractValidatorComponent } from '../validators/abstract-validator-com
 export default class FormWithValidation extends Vue implements Observer {
   @Provide() vObserver = this;
 
-  validationMap: Record<number, boolean> = {};
+  validatorsMap: Record<number, AbstractValidatorComponent> = {};
 
   update(value: AbstractValidatorComponent): void {
-    this.validationMap = { ...this.validationMap, [value.vid]: value.error };
+    this.validatorsMap = { ...this.validatorsMap, [value.vid]: value };
   }
 
   get valid() {
-    return Object.values(this.validationMap).reduce((acc, value) => acc && !value, true);
+    return Object.values(this.validatorsMap).reduce((acc, value) => acc && !value.error, true);
   }
 }
 

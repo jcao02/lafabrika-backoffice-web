@@ -19,22 +19,22 @@ describe('FormWithValidation.vue', () => {
 
       ( form as any ).update(validatorWrapper.vm);
 
-      const expected = { [( validatorWrapper.vm as any ).vid]: ( validatorWrapper.vm as any ).error };
-      expect(form.$data.validationMap).to.eql(expected);
+      const expected = { [( validatorWrapper.vm as any ).vid]: validatorWrapper.vm };
+      expect(form.$data.validatorsMap).to.eql(expected);
     });
   });
 
   describe('valid()', () => {
     it('should return true if no errors in validation map', () => {
       const wrapper = shallowMount(FormWithValidation);
-      wrapper.setData({ validationMap: { 1: false, 2: false }});
+      wrapper.setData({ validatorsMap: { 1: { error: false }, 2: { error: false } }});
 
       // tslint:disable-next-line: no-unused-expression
       expect(( wrapper.vm as any).valid).to.be.true;
     });
     it('should return false if there are errors in validation map', () => {
       const wrapper = shallowMount(FormWithValidation);
-      wrapper.setData({ validationMap: { 1: false, 2: true }});
+      wrapper.setData({ validatorsMap: { 1: { error: false }, 2: { error: true } }});
 
       // tslint:disable-next-line: no-unused-expression
       expect(( wrapper.vm as any).valid).to.be.false;
