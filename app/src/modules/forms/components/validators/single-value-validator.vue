@@ -33,7 +33,9 @@ export default class SingleValueValidator extends AbstractValidatorComponent {
     }, [] as AbstractValidationError[]);
 
     this.error = errors.length > 0;
-    this.errorMessages = errors.map(e => this.errorsDictionary[e.name] ? this.errorsDictionary[e.name] : this.errorsDictionary.default);
+    this.errorMessages = errors.map(
+      e => this.errorsDictionary[e.name] ? this.errorsDictionary[e.name] : this.errorsDictionary.default
+    );
 
     // Notify all the observers of validation performed
     this.notify();
