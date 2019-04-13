@@ -14,6 +14,7 @@ import { Mutation } from 'vuex-class';
 // Helper classes
 import { AuthenticationPayload } from '../classes/authentication-payload';
 import { NetworkRequester } from '../../shared/classes/http/network-requester';
+import { User } from '@/modules/shared/classes/resources/user';
 
 // Mixins
 import { TokenAuthenticationManager } from '../mixins/token-authentication-manager';
@@ -36,6 +37,7 @@ import { ADD_USERS, AddUsersPayload } from '../../store/data-store/mutations';
 export default class AuthenticationForm extends mixins(TokenAuthenticationManager, TokenManager) {
   @Mutation(SET_CURRENT_USER) setCurrentUser!: (payload: SetCurrentUserPayload) => void;
   @Mutation(ADD_USERS) addUsers!: (payload: AddUsersPayload) => void;
+
   form: AuthenticationPayload = {
     email: '',
     password: ''
@@ -51,9 +53,7 @@ export default class AuthenticationForm extends mixins(TokenAuthenticationManage
       const { token } = res.data;
       const userOrNull = this.decode(token);
       if (userOrNull) {
-        this.addUsers({ users: [userOrNull] });
-        this.setCurrentUser({ userId: userOrNull.id });
-
+        this.handleUser(userOrNull);
         this.persistToken(token);
         this.$router.push({ path: '/' });
       } else {
@@ -76,6 +76,14 @@ export default class AuthenticationForm extends mixins(TokenAuthenticationManage
   private setError(msg: string) {
     this.generalError = true;
     this.generalErrorMsg = msg;
+  }
+
+  /**
+   * Stores the user
+   */
+  private handleUser(user: User) {
+    this.addUsers({ users: [user] });
+    this.setCurrentUser({ userId: user.id });
   }
 
 }
