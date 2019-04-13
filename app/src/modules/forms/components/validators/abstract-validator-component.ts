@@ -41,6 +41,7 @@ export abstract class AbstractValidatorComponent extends Vue implements Observab
     this.vid = AbstractValidatorComponent.validatorCounter++;
     if (this.vObserver) {
       this.subscribe(this.vObserver);
+      this.vObserver.update(this);
     }
   }
 
