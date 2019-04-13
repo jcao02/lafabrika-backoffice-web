@@ -19,6 +19,13 @@ export default class FormWithValidation extends Vue implements Observer {
     this.validatorsMap = { ...this.validatorsMap, [value.vid]: value };
   }
 
+  validate(): boolean {
+    const validators = Object.values(this.validatorsMap);
+    validators.forEach(v => v.validate());
+
+    return this.valid;
+  }
+
   get valid() {
     return Object.values(this.validatorsMap).reduce((acc, value) => acc && !value.error, true);
   }

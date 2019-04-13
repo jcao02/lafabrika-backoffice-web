@@ -1,5 +1,6 @@
 import { shallowMount, mount } from '@vue/test-utils';
 import { expect } from 'chai';
+import sinon from 'sinon';
 
 import FormWithValidation from './form-with-validation.vue';
 import SingleValueValidator from '../validators/single-value-validator.vue';
@@ -38,6 +39,27 @@ describe('FormWithValidation.vue', () => {
 
       // tslint:disable-next-line: no-unused-expression
       expect(( wrapper.vm as any).valid).to.be.false;
+    });
+  });
+
+  describe('validate()', () => {
+    it('should call validate in all inner validators and return result', () => {
+      const vid = 1;
+      const validate = sinon.stub();
+      const error = false;
+      const validator: SingleValueValidator = shallowMount(SingleValueValidator, {
+        data: () => ({ vid, error }),
+        methods: { validate }
+      }).vm;
+      const form: FormWithValidation = shallowMount(FormWithValidation, {
+        data: () => ({ validatorsMap: { [vid]: validator} }
+      )}).vm;
+
+      const expected = !error;
+      const result = ( form as any ).validate();
+      expect(result).to.eql(expected);
+      // tslint:disable-next-line: no-unused-expression
+      expect(validate.called).to.be.true;
     });
   });
 });
