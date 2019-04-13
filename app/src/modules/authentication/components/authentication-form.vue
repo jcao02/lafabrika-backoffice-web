@@ -3,7 +3,7 @@
     <v-alert :value="generalError" type="error">{{ generalErrorMsg }}</v-alert>
     <TextWithValidationControl validators="required" type="email" v-model="form.email" label="Correo electrónico"/>
     <TextWithValidationControl validators="required" type="password" v-model="form.password" label="Contraseña"/>
-    <v-btn class="submit-btn" :disabled="!valid" color="#5B788E" dark type="submit">Entrar</v-btn>
+    <v-btn class="submit-btn" :disabled="!valid" type="submit" color="primary">Entrar</v-btn>
   </FormWithValidation>
 </template>
 
