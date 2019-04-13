@@ -1,5 +1,5 @@
 <template>
-  <FormWithValidation @submit.prevent="onSubmit" v-slot="{ valid }">
+  <FormWithValidation ref="form" @submit.prevent="onSubmit" v-slot="{ valid }">
     <v-alert :value="generalError" type="error">{{ generalErrorMsg }}</v-alert>
     <TextWithValidationControl validators="required" type="email" v-model="form.email" label="Correo electrónico"/>
     <TextWithValidationControl validators="required" type="password" v-model="form.password" label="Contraseña"/>
@@ -47,26 +47,30 @@ export default class AuthenticationForm extends mixins(TokenAuthenticationManage
   generalErrorMsg = '';
 
   async onSubmit(event: Event) {
-    const { email, password } = this.form;
-    try {
-      const res = await this.authenticate(this.form, { baseURL: process.env.VUE_APP_AUTH_BASE_URL });
-      const { token } = res.data;
-      const userOrNull = this.decode(token);
-      if (userOrNull) {
-        this.handleUser(userOrNull);
-        this.persistToken(token);
-        this.$router.push({ path: '/' });
-      } else {
-        const errorMsg = 'Algo inesperado ocurrió, vuelve a intentar más tarde';
+    const form = this.$refs.form as FormWithValidation;
+    const valid = form.validate();
+    if (valid) {
+      const { email, password } = this.form;
+      try {
+        const res = await this.authenticate(this.form, { baseURL: process.env.VUE_APP_AUTH_BASE_URL });
+        const { token } = res.data;
+        const userOrNull = this.decode(token);
+        if (userOrNull) {
+          this.handleUser(userOrNull);
+          this.persistToken(token);
+          this.$router.push({ path: '/' });
+        } else {
+          const errorMsg = 'Algo inesperado ocurrió, vuelve a intentar más tarde';
+          this.setError(errorMsg);
+        }
+      } catch (err) {
+        const { response } = err;
+        const errorMsg = response.status === 401
+          ? 'Combinación usuario/contraseña incorrecta'
+          : `Hubo un error en el servidor (${response.status})`;
+
         this.setError(errorMsg);
       }
-    } catch (err) {
-      const { response } = err;
-      const errorMsg = response.status === 401
-        ? 'Combinación usuario/contraseña incorrecta'
-        : `Hubo un error en el servidor (${response.status})`;
-
-      this.setError(errorMsg);
     }
   }
 
