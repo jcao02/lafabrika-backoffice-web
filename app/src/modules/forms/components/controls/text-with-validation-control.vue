@@ -15,7 +15,7 @@
 <script lang="ts">
 import { Prop, Vue, Component, Emit } from 'vue-property-decorator';
 
-import SingleValueValidator from '../validators/single-value-validator.vue';
+import { SingleValueValidator } from '../validators';
 import TextControl from './text-control.vue';
 
 /**
