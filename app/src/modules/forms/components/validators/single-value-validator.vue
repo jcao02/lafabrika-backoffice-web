@@ -7,7 +7,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import { AbstractValidatorComponent } from './abstract-validator-component';
-import { AbstractValidationError } from '../../classes/errors/validation-error';
+import { AbstractValidationError } from '../../classes/errors';
 
 @Component
 export default class SingleValueValidator extends AbstractValidatorComponent {

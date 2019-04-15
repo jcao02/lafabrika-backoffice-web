@@ -14,14 +14,17 @@
 
 <script lang="ts">
 import { Prop, Vue, Component, Emit } from 'vue-property-decorator';
-import { AbstractValidator } from '../../classes/validators/abstract-validator';
-import { ValidatorFactory } from '../../classes/factories/validator-factory';
-import { defaultDictionary } from '../../classes/error-messages/default-error-messages';
-import { ValidatorName } from '../../classes/validators/validator-names';
 
-import SingleValueValidator from '../validators/single-value-validator.vue';
+import { SingleValueValidator } from '../validators';
 import TextControl from './text-control.vue';
-import { Control } from '../../classes/controls/control';
+
+/**
+ * Helper classes
+ */
+import { AbstractValidator, ValidatorName } from '../../classes/validators';
+import { Control } from '../../classes/controls';
+import { ValidatorFactory } from '../../classes/factories';
+import { defaultDictionary } from '../../classes/error-messages';
 
 @Component({
   components: {

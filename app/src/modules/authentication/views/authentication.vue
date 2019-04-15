@@ -24,7 +24,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import AuthenticationForm from '../components/authentication-form.vue';
+import { AuthenticationForm } from '../components';
 
 @Component({
   components: {

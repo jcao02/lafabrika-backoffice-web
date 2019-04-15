@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import sinon from 'sinon';
 
 import FormWithValidation from './form-with-validation.vue';
-import SingleValueValidator from '../validators/single-value-validator.vue';
+import { SingleValueValidator } from '../validators';
 
 describe('FormWithValidation.vue', () => {
   it('should mount the component', () => {

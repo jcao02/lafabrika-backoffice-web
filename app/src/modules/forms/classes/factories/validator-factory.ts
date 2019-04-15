@@ -1,6 +1,4 @@
-import { AbstractValidator } from '../validators/abstract-validator';
-import { RequiredValidator } from '../validators/required-validator';
-import { ValidatorName } from '../validators/validator-names';
+import { AbstractValidator, RequiredValidator, ValidatorName } from '../validators';
 
 export class ValidatorFactory {
   static createValidator(type: ValidatorName): AbstractValidator {

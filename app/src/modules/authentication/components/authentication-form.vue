@@ -21,8 +21,7 @@ import { TokenAuthenticationManager } from '../mixins/token-authentication-manag
 import { TokenManager } from '../mixins/token-manager';
 
 // Components
-import FormWithValidation from '../../forms/components/forms/form-with-validation.vue';
-import TextWithValidationControl from '../../forms/components/controls/text-with-validation-control.vue';
+import { FormWithValidation, TextWithValidationControl } from '@/modules/forms';
 
 // Mutations
 import { SET_CURRENT_USER, SetCurrentUserPayload } from '../../store/ui-store/mutations';

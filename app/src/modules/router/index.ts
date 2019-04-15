@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-import Authentication from '@/modules/authentication/views/authentication.vue';
-import Backoffice from '@/modules/backoffice/views/backoffice.vue';
+import { Authentication } from '@/modules/authentication';
+import { Backoffice } from '@/modules/backoffice';
 import { notSignedIn, signedIn } from './guards';
 
 Vue.use(Router);
