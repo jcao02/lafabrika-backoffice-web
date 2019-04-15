@@ -1,5 +1,5 @@
 import { AbstractValidator } from './abstract-validator';
-import { RequiredValidationError } from '../errors/required-validation-error';
+import { RequiredValidationError } from '../errors';
 import { ValidatorName } from './validator-names';
 
 export class RequiredValidator implements AbstractValidator {

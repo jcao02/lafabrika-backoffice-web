@@ -1,9 +1,10 @@
 import { Prop, Vue, Component, Inject, Provide } from 'vue-property-decorator';
-import { AbstractValidator } from '../../classes/validators/abstract-validator';
-import { ErrorMessagesDictionary } from '../../classes/error-messages/error-messages-dictionary';
 import { Observable } from '@/modules/shared/classes/observables/observable';
 import { Observer } from '@/modules/shared/classes/observables/observer';
-import { ControlState } from '../../classes/controls/control-state';
+
+import { ControlState } from '../../classes/controls';
+import { AbstractValidator } from '../../classes/validators';
+import { ErrorMessagesDictionary } from '../../classes/error-messages';
 
 /**
  * Represents a component that validates inner controls

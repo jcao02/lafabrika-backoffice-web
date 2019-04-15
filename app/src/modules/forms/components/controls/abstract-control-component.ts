@@ -1,8 +1,8 @@
 import { Prop, Vue, Component, Emit, Inject } from 'vue-property-decorator';
-import { ControlState } from '../../classes/controls/control-state';
 import { Observable } from '@/modules/shared/classes/observables/observable';
 import { Observer } from '@/modules/shared/classes/observables/observer';
-import { Control } from '../../classes/controls/control';
+
+import { ControlState, Control } from '../../classes/controls';
 
 /**
  * Represents a component that holds a control

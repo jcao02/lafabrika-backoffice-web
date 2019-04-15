@@ -2,8 +2,8 @@ import { expect } from 'chai';
 import { shallowMount, mount } from '@vue/test-utils';
 
 import SingleValueValidator from './single-value-validator.vue';
-import { RequiredValidator } from '../../classes/validators/required-validator';
-import { RequiredValidationError } from '../../classes/errors/required-validation-error';
+import { RequiredValidator } from '../../classes/validators';
+import { RequiredValidationError } from '../../classes/errors';
 
 describe('SingleValueValidator.vue', () => {
   it('should mount the component', () => {
