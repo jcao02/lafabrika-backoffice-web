@@ -10,7 +10,7 @@ import { Backoffice } from '@/modules/backoffice';
 
 // Lazy components
 const Admin = () => import('@/modules/admin/views/admin.vue');
-const UserList = () => import('@/modules/admin/views/user-list.vue');
+const UserPanel = () => import('@/modules/admin/views/user-panel.vue');
 
 Vue.use(Router);
 
@@ -31,7 +31,7 @@ const router = new Router({
             {
               path: '',
               components: {
-                default: UserList
+                default: UserPanel
               }
             }
           ]

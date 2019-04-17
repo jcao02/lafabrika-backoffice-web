@@ -47,7 +47,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { User } from '@/modules/shared/classes/resources/user';
 
 @Component
-export default class UserList extends Vue {
+export default class UserPanel extends Vue {
   items: User[] = [
     { id: '1', email: 'jon@example.com', role: 'admin' },
     { id: '2', email: 'dan@example.com', role: 'user' }
