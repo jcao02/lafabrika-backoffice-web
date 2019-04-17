@@ -28,7 +28,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { mixins } from 'vue-class-component';
-import { Mutation } from 'vuex-class';
+import { Mutation, Getter } from 'vuex-class';
 
 import { UserList } from '../components';
 import { UserListManager } from '../mixins';
@@ -42,12 +42,8 @@ import { ADD_USERS, AddUsersPayload } from '@/modules/store/data-store/mutations
   }
 })
 export default class UserPanel extends mixins(UserListManager) {
+  @Getter('getAllUsers') users!: User[];
   @Mutation(ADD_USERS) addUsers!: (payload: AddUsersPayload) => void;
-
-  users: User[] = [
-    { id: '1', email: 'jon@example.com', role: 'admin' },
-    { id: '2', email: 'dan@example.com', role: 'user' }
-  ];
 
   async created() {
     await this.fetchUsers();
