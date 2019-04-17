@@ -3,7 +3,7 @@ import Router from 'vue-router';
 
 import { Authentication } from '@/modules/authentication';
 import { Backoffice } from '@/modules/backoffice';
-import { notSignedIn, signedIn } from './guards';
+import { notSignedIn, signedIn, isAdmin } from './guards';
 
 Vue.use(Router);
 
@@ -14,7 +14,15 @@ const router = new Router({
     {
       path: '/',
       name: 'backoffice',
-      component: Backoffice
+      component: Backoffice,
+      children: [
+        {
+          path: '/admin',
+          name: 'admin',
+          component: () => import('@/modules/admin/views/admin.vue'),
+          beforeEnter: isAdmin
+        }
+      ]
     },
     {
       path: '/auth',
