@@ -4,10 +4,10 @@ import { CurrentUserManager } from '@/modules/shared/classes/state/current-user-
 /**
  * Guard to stop navigation if the user is signed-in
  */
-export const signedIn: NavigationGuard = (to, from, next) => {
-  if (to.meta.requiresNotAuth || CurrentUserManager.isSignedIn()) {
+export const isAdmin: NavigationGuard = (to, from, next) => {
+  if (CurrentUserManager.isAdmin()) {
     next();
   } else  {
-    next('/auth');
+    next(false);
   }
 };

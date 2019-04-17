@@ -6,7 +6,7 @@ import { getCurrentUser } from './getters';
 describe('UIStore Getters', () => {
   describe('getCurrentUser', () => {
     it('should get the current user', () => {
-      const user: User = { id: '1', email: 'jon@example.com' };
+      const user: User = { id: '1', email: 'jon@example.com', role: 'admin' };
       const state: UIState = { currentUser: user.id };
       const getUserById = () => user;
 
@@ -14,7 +14,7 @@ describe('UIStore Getters', () => {
       expect(getCurrentUser(state, {}, {}, { getUserById })).to.eql(expected);
     });
     it('should get null if the current user is null', () => {
-      const user: User = { id: '1', email: 'jon@example.com' };
+      const user: User = { id: '1', email: 'jon@example.com', role: 'admin' };
       const state: UIState = { currentUser: null };
       const getUserById = () => user;
 

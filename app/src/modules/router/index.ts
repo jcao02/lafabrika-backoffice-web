@@ -1,9 +1,16 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
+// Guards
+import { notSignedIn, signedIn, isAdmin } from './guards';
+
+// Eager components
 import { Authentication } from '@/modules/authentication';
 import { Backoffice } from '@/modules/backoffice';
-import { notSignedIn, signedIn } from './guards';
+
+// Lazy components
+const Admin = () => import('@/modules/admin/views/admin.vue');
+const UserAdminPanel = () => import('@/modules/user-admin-panel/views/user-admin-panel.vue');
 
 Vue.use(Router);
 
@@ -14,7 +21,22 @@ const router = new Router({
     {
       path: '/',
       name: 'backoffice',
-      component: Backoffice
+      component: Backoffice,
+      children: [
+        {
+          path: 'admin',
+          beforeEnter: isAdmin,
+          component: Admin,
+          children: [
+            {
+              path: '',
+              components: {
+                default: UserAdminPanel
+              }
+            }
+          ]
+        }
+      ]
     },
     {
       path: '/auth',
