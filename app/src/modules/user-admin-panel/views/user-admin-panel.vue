@@ -41,7 +41,7 @@ import { ADD_USERS, AddUsersPayload } from '@/modules/store/data-store/mutations
     InnerUserList
   }
 })
-export default class UserList extends mixins(UserListManager) {
+export default class UserAdminPanel extends mixins(UserListManager) {
   @Getter('getAllUsers') users!: User[];
   @Mutation(ADD_USERS) addUsers!: (payload: AddUsersPayload) => void;
 
