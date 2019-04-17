@@ -2,24 +2,7 @@
   <v-container>
     <v-layout row justify-center align-content-center>
       <v-flex xs5>
-        <v-list subheader>
-          <v-subheader>Todos los usuarios</v-subheader>
-
-          <template v-for="( item, index ) in items">
-            <v-list-tile
-              :key="item.email"
-              avatar
-            >
-              <v-list-tile-avatar>
-                <v-icon class="account_circle">account_circle</v-icon>
-              </v-list-tile-avatar>
-              <v-list-tile-content>
-                <v-list-tile-title v-html="item.email"></v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-            <v-divider :key="index"></v-divider>
-          </template>
-        </v-list>
+        <UserList :users="users" />
       </v-flex>
       <v-spacer></v-spacer>
       <v-flex xs4>
@@ -44,11 +27,16 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { UserList } from '../components';
 import { User } from '@/modules/shared/classes/resources/user';
 
-@Component
+@Component({
+  components: {
+    UserList
+  }
+})
 export default class UserPanel extends Vue {
-  items: User[] = [
+  users: User[] = [
     { id: '1', email: 'jon@example.com', role: 'admin' },
     { id: '2', email: 'dan@example.com', role: 'user' }
   ];
