@@ -19,7 +19,7 @@ import Component, { mixins } from 'vue-class-component';
 import { Mutation, Getter } from 'vuex-class';
 
 // Mixins
-import { CurrentUserManager } from '@/modules/shared/classes/state/current-user-manager';
+import { CurrentUserManagerMixin } from '@/modules/shared/classes/state/current-user-manager-mixin';
 import { TokenManager } from '@/modules/authentication/mixins/token-manager';
 
 // Store Mutarions
@@ -29,7 +29,7 @@ import { SET_CURRENT_USER, SetCurrentUserPayload } from '@/modules/store/ui-stor
 import { User } from '@/modules/shared/classes/resources/user';
 
 @Component
-export default class Backoffice extends mixins(TokenManager, CurrentUserManager) {
+export default class Backoffice extends mixins(TokenManager, CurrentUserManagerMixin) {
   @Mutation(SET_CURRENT_USER) setCurrentUser!: (payload: SetCurrentUserPayload) => void;
 
   /**
