@@ -27,18 +27,41 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { mixins } from 'vue-class-component';
+import { Mutation } from 'vuex-class';
+
 import { UserList } from '../components';
+import { UserListManager } from '../mixins';
+
 import { User } from '@/modules/shared/classes/resources/user';
+import { ADD_USERS, AddUsersPayload } from '@/modules/store/data-store/mutations';
 
 @Component({
   components: {
     UserList
   }
 })
-export default class UserPanel extends Vue {
+export default class UserPanel extends mixins(UserListManager) {
+  @Mutation(ADD_USERS) addUsers!: (payload: AddUsersPayload) => void;
+
   users: User[] = [
     { id: '1', email: 'jon@example.com', role: 'admin' },
     { id: '2', email: 'dan@example.com', role: 'user' }
   ];
+
+  async created() {
+    await this.fetchUsers();
+  }
+
+  async fetchUsers() {
+    try {
+      const limit = 12;
+      const offset = 0;
+      const response = await this.getUsers({ params: { limit, offset }, baseURL: process.env.VUE_APP_USERS_BASE_URL});
+      this.addUsers({ users: response.data });
+    } catch (err) {
+
+    }
+  }
 }
 </script>
