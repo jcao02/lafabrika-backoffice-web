@@ -4,7 +4,7 @@ import { decode } from 'jsonwebtoken';
 import { set, remove, get } from 'js-cookie';
 import { User } from '@/modules/shared/classes/resources/user';
 
-const TOKEN_KEY = 'AUTH_TOKEN';
+const TOKEN_KEY = 'token';
 
 @Component
 export class TokenManager extends Vue {
