@@ -7,4 +7,8 @@ export class CurrentUserManager {
   isSignedIn(): boolean {
     return !!store.getters.getCurrentUser;
   }
+
+  isAdmin(): boolean {
+    return this.isSignedIn() && store.getters.getCurrentUser.role === 'admin';
+  }
 }
