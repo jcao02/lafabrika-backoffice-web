@@ -1,10 +1,14 @@
 <template>
-  <div class="admin">
-    <h1>ADMIN</h1>
-  </div>
+<div class="admin">
+  <!-- Children routes -->
+  <router-view/>
+</div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import Vue from 'vue';
+import Component from 'vue-class-component';
+
+@Component
 export default class Admin extends Vue {}
 </script>
