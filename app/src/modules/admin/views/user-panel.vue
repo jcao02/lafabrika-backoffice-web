@@ -56,7 +56,7 @@ export default class UserPanel extends mixins(UserListManager) {
       const response = await this.getUsers({ params: { limit, offset }, baseURL: process.env.VUE_APP_USERS_BASE_URL});
       this.addUsers({ users: response.data });
     } catch (err) {
-
+      this.$toast.error('Hubo un error. Intenta más tarde');
     }
   }
 }
