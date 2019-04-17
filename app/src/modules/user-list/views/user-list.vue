@@ -2,7 +2,7 @@
   <v-container>
     <v-layout row justify-center align-content-center>
       <v-flex xs5>
-        <UserList :users="users" />
+        <InnerUserList :users="users" />
       </v-flex>
       <v-spacer></v-spacer>
       <v-flex xs4>
@@ -30,7 +30,7 @@ import { Component, Vue } from 'vue-property-decorator';
 import { mixins } from 'vue-class-component';
 import { Mutation, Getter } from 'vuex-class';
 
-import { UserList } from '../components';
+import { UserList as InnerUserList } from '../components';
 import { UserListManager } from '../mixins';
 
 import { User } from '@/modules/shared/classes/resources/user';
@@ -38,10 +38,10 @@ import { ADD_USERS, AddUsersPayload } from '@/modules/store/data-store/mutations
 
 @Component({
   components: {
-    UserList
+    InnerUserList
   }
 })
-export default class UserPanel extends mixins(UserListManager) {
+export default class UserList extends mixins(UserListManager) {
   @Getter('getAllUsers') users!: User[];
   @Mutation(ADD_USERS) addUsers!: (payload: AddUsersPayload) => void;
 
