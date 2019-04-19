@@ -3,6 +3,10 @@
     <v-alert :value="generalError" type="error">{{ generalErrorMsg }}</v-alert>
     <TextWithValidationControl validators="required|email" type="email" v-model="form.email" label="Correo electrónico"/>
     <TextWithValidationControl validators="required|min-length:8" type="password" v-model="form.password" label="Contraseña"/>
+    <!-- TODO: This should have a wrapper component -->
+    <v-radio-group v-model="form.role" label="Rol">
+      <v-radio v-for="role in roles" :key="role" :value="role" :label="role"></v-radio>
+    </v-radio-group>
     <v-btn class="submit-btn" :disabled="!valid" type="submit" color="primary">Enviar</v-btn>
   </FormWithValidation>
 </template>
@@ -20,9 +24,11 @@ import { FormWithValidation, TextWithValidationControl } from '@/modules/forms';
   }
 })
 export default class UserNewForm extends Vue {
+  roles = [ 'user', 'admin' ];
   form = {
     email: '',
-    password: ''
+    password: '',
+    role: this.roles[0]
   };
 
   generalError = false;
