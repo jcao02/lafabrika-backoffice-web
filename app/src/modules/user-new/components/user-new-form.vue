@@ -13,9 +13,12 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Component from 'vue-class-component';
+import Component, { mixins } from 'vue-class-component';
 
+import { UserNewManager } from '../mixins';
 import { FormWithValidation, TextWithValidationControl } from '@/modules/forms';
+import { Mutation } from 'vuex-class';
+import { ADD_USERS, AddUsersPayload } from '@/modules/store/data-store/mutations';
 
 @Component({
   components: {
@@ -23,7 +26,8 @@ import { FormWithValidation, TextWithValidationControl } from '@/modules/forms';
     TextWithValidationControl
   }
 })
-export default class UserNewForm extends Vue {
+export default class UserNewForm extends mixins(UserNewManager) {
+  @Mutation(ADD_USERS) addUsers!: (payload: AddUsersPayload) => void;
   roles = [ 'user', 'admin' ];
   form = {
     email: '',
@@ -38,12 +42,16 @@ export default class UserNewForm extends Vue {
     const form = this.$refs.form as FormWithValidation;
     const valid = form.validate();
     if (valid) {
-      const { email, password } = this.form;
       try {
+        const res = await this.createUser(this.form, { baseURL: process.env.VUE_APP_USERS_BASE_URL });
+        const user = res.data;
+        this.addUsers({ users: [user] });
+        this.$toast.success('Usuario creado exitosamente');
+        this.$router.push('/admin');
       } catch (err) {
         const { response } = err;
-        const errorMsg = response.status === 401
-          ? 'Combinación usuario/contraseña incorrecta'
+        const errorMsg = response.status === 409
+          ? 'El correo ya está registrado'
           : `Hubo un error en el servidor (${response.status})`;
 
         this.setError(errorMsg);
