@@ -27,6 +27,31 @@ export default class UserNewForm extends Vue {
 
   generalError = false;
   generalErrorMsg = '';
+
+  async onSubmit() {
+    const form = this.$refs.form as FormWithValidation;
+    const valid = form.validate();
+    if (valid) {
+      const { email, password } = this.form;
+      try {
+      } catch (err) {
+        const { response } = err;
+        const errorMsg = response.status === 401
+          ? 'Combinación usuario/contraseña incorrecta'
+          : `Hubo un error en el servidor (${response.status})`;
+
+        this.setError(errorMsg);
+      }
+    }
+  }
+
+  /**
+   * Sets a general error with message
+   */
+  private setError(msg: string) {
+    this.generalError = true;
+    this.generalErrorMsg = msg;
+  }
 }
 </script>
 
