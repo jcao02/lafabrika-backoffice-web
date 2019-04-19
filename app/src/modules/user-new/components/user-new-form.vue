@@ -2,7 +2,7 @@
   <FormWithValidation ref="form" @submit.prevent="onSubmit" v-slot="{ valid }">
     <v-alert :value="generalError" type="error">{{ generalErrorMsg }}</v-alert>
     <TextWithValidationControl validators="required|email" type="email" v-model="form.email" label="Correo electrónico"/>
-    <TextWithValidationControl validators="required" type="password" v-model="form.password" label="Contraseña"/>
+    <TextWithValidationControl validators="required|min-length:8" type="password" v-model="form.password" label="Contraseña"/>
     <v-btn class="submit-btn" :disabled="!valid" type="submit" color="primary">Enviar</v-btn>
   </FormWithValidation>
 </template>
