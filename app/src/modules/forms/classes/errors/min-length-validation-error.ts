@@ -3,9 +3,9 @@ import { ValidatorName } from '../validators/validator-names';
 
 export class MinLengthValidationError implements AbstractValidationError {
   readonly name = ValidatorName.MINLENGTH;
-  length: number;
+  args: any[];
 
   constructor(length: number) {
-    this.length = length;
+    this.args = [length];
   }
 }
