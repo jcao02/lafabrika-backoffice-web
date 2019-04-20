@@ -12,7 +12,7 @@
           </v-card-title>
           <!-- Form -->
           <v-card-text class="form-container">
-            <UserEditForm />
+            <UserEditForm :user="user"/>
           </v-card-text>
         </v-layout>
       </v-card>
@@ -22,15 +22,46 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Component from 'vue-class-component';
+import Component, { mixins } from 'vue-class-component';
 import { UserEditForm } from '../components';
+import { UserShowManager } from '../classes';
+import { Route, RawLocation } from 'vue-router';
+import { User } from '@/modules/shared/classes/resources/user';
 
 @Component({
   components: {
     UserEditForm
   }
 })
-export default class UserEdit extends Vue {}
+export default class UserEdit extends Vue {
+  user: User | null = null;
+
+  async beforeRouteEnter(
+    to: Route,
+    from: Route,
+    next: (to?: RawLocation | false | ((vm: UserEdit) => any) | void) => void) {
+
+    const { id } = to.params;
+    try {
+      const res = await UserShowManager.getUser(id);
+      const user = res.data;
+      next(vm => vm.setUser(user));
+    } catch (err) {
+      let msg = 'Error obteniendo el usuario';
+
+      if ('response' in err) {
+        const response = err.response;
+        msg = response.statusCode === 404 ? 'Usuario no existe' : msg;
+      }
+
+      next(vm => vm.$toast.error(msg));
+    }
+  }
+
+  setUser(user: User) {
+    this.user = user;
+  }
+}
 </script>
 
 <style scoped>
