@@ -12,6 +12,7 @@ import { Backoffice } from '@/modules/backoffice';
 const Admin = () => import('@/modules/admin/views/admin.vue');
 const UserAdminPanel = () => import('@/modules/user-admin-panel/views/user-admin-panel.vue');
 const UserNew = () => import('@/modules/user-new/views/user-new.vue');
+const UserEdit = () => import('@/modules/user-edit/views/user-edit.vue');
 
 Vue.use(Router);
 
@@ -36,6 +37,10 @@ const router = new Router({
             {
               path: 'users/new',
               component: UserNew
+            },
+            {
+              path: 'users/edit/:id',
+              component: UserEdit
             }
           ]
         }
