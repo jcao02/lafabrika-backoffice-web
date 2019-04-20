@@ -1,10 +1,8 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { Requester } from '@/modules/shared/classes/http/requester';
-import { Response } from '@/modules/shared/classes/http/response';
 import { Authentication } from '@/modules/shared/classes/resources/authentication';
-import { NetworkRequester } from '@/modules/shared/classes/http/network-requester';
-import { RequestOptions } from '@/modules/shared/classes/http/request-options';
+import { RequestOptions, Requester, Response, NetworkRequester } from '@/modules/http';
+
 import { AuthenticationManager } from '../classes/authentication-manager';
 import { AuthenticationPayload } from '../classes/authentication-payload';
 

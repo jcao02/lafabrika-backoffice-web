@@ -12,8 +12,8 @@ import Component, { mixins } from 'vue-class-component';
 import { Mutation } from 'vuex-class';
 
 // Helper classes
+import { NetworkRequester } from '@/modules/http';
 import { AuthenticationPayload } from '../classes/authentication-payload';
-import { NetworkRequester } from '../../shared/classes/http/network-requester';
 import { User } from '@/modules/shared/classes/resources/user';
 
 // Mixins
