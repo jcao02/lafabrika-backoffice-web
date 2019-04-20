@@ -19,7 +19,8 @@ export class UserNewManager extends Vue {
   }
 
   /**
-   * Request users to API
+   * Creates a user
+   * @param payload to be sent
    * @param options of the request
    */
   createUser(payload: Omit<User, 'id'> & { password: string; }, options?: RequestOptions): Promise<Response<User>> {
