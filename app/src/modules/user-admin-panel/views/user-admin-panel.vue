@@ -2,7 +2,7 @@
   <v-container>
     <v-layout row justify-center align-content-center>
       <v-flex xs6>
-        <UserList :users="users" />
+        <UserList :users="users" @delete-user="onDelete"/>
       </v-flex>
       <v-spacer></v-spacer>
       <v-flex xs4>
@@ -57,6 +57,17 @@ export default class UserAdminPanel extends mixins(UserListManager) {
       this.addUsers({ users: response.data });
     } catch (err) {
       this.$toast.error('Hubo un error. Intenta más tarde');
+    }
+  }
+
+  async onDelete(id: string) {
+    console.log('PANEL', id);
+    if (window.confirm(`¿Estas seguro que quieres eliminar al usuario con ID = ${id}?`)) {
+      try {
+        const res = await this.deleteUser(id, { baseURL: process.env.VUE_APP_USERS_BASE_URL });
+      } catch (err) {
+        this.$toast.error('No se pudo eliminar el usuario. Intenta más tarde');
+      }
     }
   }
 }
