@@ -61,7 +61,6 @@ export default class UserAdminPanel extends mixins(UserListManager) {
   }
 
   async onDelete(id: string) {
-    console.log('PANEL', id);
     if (window.confirm(`¿Estas seguro que quieres eliminar al usuario con ID = ${id}?`)) {
       try {
         const res = await this.deleteUser(id, { baseURL: process.env.VUE_APP_USERS_BASE_URL });

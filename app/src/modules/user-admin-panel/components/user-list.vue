@@ -39,6 +39,7 @@ import { User } from '@/modules/shared/classes/resources/user';
 export default class UserList extends Vue {
   @Prop() users!: User[];
   @Emit()
+  // tslint:disable-next-line: no-empty
   deleteUser(id: string) {}
 }
 </script>
