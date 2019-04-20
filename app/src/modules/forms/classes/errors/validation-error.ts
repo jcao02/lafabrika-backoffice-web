@@ -6,4 +6,5 @@ import { ValidatorName } from '../validators/validator-names';
  */
 export interface AbstractValidationError {
   readonly name: ValidatorName;
+  args?: any[];
 }

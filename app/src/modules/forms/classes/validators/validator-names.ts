@@ -1,3 +1,6 @@
 export enum ValidatorName {
-  REQUIRED = 'required'
+  REQUIRED = 'required',
+  EMAIL = 'email',
+  MINLENGTH = 'min-length',
+  MATCHVALUE = 'match-value'
 }

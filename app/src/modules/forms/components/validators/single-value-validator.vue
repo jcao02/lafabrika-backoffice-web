@@ -32,13 +32,35 @@ export default class SingleValueValidator extends AbstractValidatorComponent {
       return acc;
     }, [] as AbstractValidationError[]);
 
+    // Set visual state
     this.error = errors.length > 0;
-    this.errorMessages = errors.map(
-      e => this.errorsDictionary[e.name] ? this.errorsDictionary[e.name] : this.errorsDictionary.default
-    );
+
+    // Set messages
+    this.setErrorMessages(errors);
 
     // Notify all the observers of validation performed
     this.notify();
+
+  }
+
+  /**
+   * Sets the errorMessages array based on the error objects array
+   */
+  private setErrorMessages(errors: AbstractValidationError[]) {
+    this.errorMessages = errors.map(
+      e => {
+        const stringOrFunction = e.name in this.errorsDictionary
+          ? this.errorsDictionary[e.name]
+          : this.errorsDictionary.default;
+
+        if (typeof stringOrFunction === 'function') {
+          const args = e.args || [];
+          return stringOrFunction(...args);
+        } else {
+          return stringOrFunction;
+        }
+      }
+    );
   }
 
 }

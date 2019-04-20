@@ -1,17 +1,25 @@
 <template>
   <FormWithValidation ref="form" @submit.prevent="onSubmit" v-slot="{ valid }">
     <v-alert :value="generalError" type="error">{{ generalErrorMsg }}</v-alert>
-    <TextWithValidationControl validators="required" type="email" v-model="form.email" label="Correo electrónico"/>
-    <TextWithValidationControl validators="required" type="password" v-model="form.password" label="Contraseña"/>
+    <TextWithValidationControl validators="required|email" type="email" v-model="form.email" label="Correo electrónico"/>
+    <TextWithValidationControl validators="required|min-length:8" type="password" v-model="form.password" label="Contraseña"/>
+    <TextWithValidationControl :validators="'match-value:'+form.password" type="password" v-model="form.passwordConfirmation" label="Confirmar contraseña"/>
+    <!-- TODO: This should have a wrapper component -->
+    <v-radio-group v-model="form.role" label="Rol">
+      <v-radio v-for="role in roles" :key="role" :value="role" :label="role"></v-radio>
+    </v-radio-group>
     <v-btn class="submit-btn" :disabled="!valid" type="submit" color="primary">Enviar</v-btn>
   </FormWithValidation>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import Component from 'vue-class-component';
+import Component, { mixins } from 'vue-class-component';
 
+import { UserNewManager } from '../mixins';
 import { FormWithValidation, TextWithValidationControl } from '@/modules/forms';
+import { Mutation } from 'vuex-class';
+import { ADD_USERS, AddUsersPayload } from '@/modules/store/data-store/mutations';
 
 @Component({
   components: {
@@ -19,10 +27,14 @@ import { FormWithValidation, TextWithValidationControl } from '@/modules/forms';
     TextWithValidationControl
   }
 })
-export default class UserNewForm extends Vue {
+export default class UserNewForm extends mixins(UserNewManager) {
+  @Mutation(ADD_USERS) addUsers!: (payload: AddUsersPayload) => void;
+  roles = [ 'user', 'admin' ];
   form = {
     email: '',
-    password: ''
+    password: '',
+    passwordConfirmation: '',
+    role: this.roles[0]
   };
 
   generalError = false;
@@ -32,12 +44,17 @@ export default class UserNewForm extends Vue {
     const form = this.$refs.form as FormWithValidation;
     const valid = form.validate();
     if (valid) {
-      const { email, password } = this.form;
       try {
+        const { email, password, role } = this.form;
+        const res = await this.createUser({ email, password, role }, { baseURL: process.env.VUE_APP_USERS_BASE_URL });
+        const user = res.data;
+        this.addUsers({ users: [user] });
+        this.$toast.success('Usuario creado exitosamente');
+        this.$router.push('/admin');
       } catch (err) {
         const { response } = err;
-        const errorMsg = response.status === 401
-          ? 'Combinación usuario/contraseña incorrecta'
+        const errorMsg = response.status === 409
+          ? 'El correo ya está registrado'
           : `Hubo un error en el servidor (${response.status})`;
 
         this.setError(errorMsg);
