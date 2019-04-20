@@ -1,6 +1,5 @@
 import { Prop, Vue, Component, Emit, Inject, Watch } from 'vue-property-decorator';
-import { Observable } from '@/modules/shared/classes/observables/observable';
-import { Observer } from '@/modules/shared/classes/observables/observer';
+import { Observable, Observer } from 'lafabrika-patterns';
 
 import { ControlState, Control } from '../../classes/controls';
 

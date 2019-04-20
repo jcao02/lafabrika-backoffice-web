@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { decode } from 'jsonwebtoken';
 import { set, remove, get } from 'js-cookie';
-import { User } from '@/modules/shared/classes/resources/user';
+import { User } from 'lafabrika-resources';
 
 const TOKEN_KEY = 'token';
 

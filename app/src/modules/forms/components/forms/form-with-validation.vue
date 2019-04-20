@@ -6,7 +6,7 @@
 
 <script lang="ts">
 import { Component, Vue, Provide } from 'vue-property-decorator';
-import { Observer } from '../../../shared/classes/observables/observer';
+import { Observer } from 'lafabrika-patterns';
 import { AbstractValidatorComponent } from '../validators/abstract-validator-component';
 
 @Component

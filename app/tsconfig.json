@@ -11,11 +11,18 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ],
     "types": [
       "webpack-env",
       "mocha",
       "chai",
-      "vuetify"
+      "vuetify",
+      "resources",
+      "patterns",
+      "helpers"
     ],
     "paths": {
       "@/*": [

@@ -17,6 +17,7 @@
 import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
 import { Mutation, Getter } from 'vuex-class';
+import { User } from 'lafabrika-resources';
 
 // Mixins
 import { CurrentUserManagerMixin } from '@/modules/shared/classes/state/current-user-manager-mixin';
@@ -25,8 +26,6 @@ import { TokenManager } from '@/modules/authentication/mixins/token-manager';
 // Store Mutarions
 import { SET_CURRENT_USER, SetCurrentUserPayload } from '@/modules/store/ui-store/mutations';
 
-// Helper classes
-import { User } from '@/modules/shared/classes/resources/user';
 
 @Component
 export default class Backoffice extends mixins(TokenManager, CurrentUserManagerMixin) {

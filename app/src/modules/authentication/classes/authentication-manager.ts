@@ -1,6 +1,5 @@
-import { Response } from '@/modules/shared/classes/http/response';
-import { Authentication } from '@/modules/shared/classes/resources/authentication';
-import { RequestOptions } from '@/modules/shared/classes/http/request-options';
+import { Authentication } from 'lafabrika-resources';
+import { RequestOptions, Response } from '@/modules/http';
 import { AuthenticationPayload } from './authentication-payload';
 
 export interface AuthenticationManager {

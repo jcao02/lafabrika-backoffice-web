@@ -10,11 +10,11 @@
 <script lang="ts">
 import Component, { mixins } from 'vue-class-component';
 import { Mutation } from 'vuex-class';
+import { User } from 'lafabrika-resources';
 
 // Helper classes
+import { NetworkRequester } from '@/modules/http';
 import { AuthenticationPayload } from '../classes/authentication-payload';
-import { NetworkRequester } from '../../shared/classes/http/network-requester';
-import { User } from '@/modules/shared/classes/resources/user';
 
 // Mixins
 import { TokenAuthenticationManager } from '../mixins/token-authentication-manager';
