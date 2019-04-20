@@ -3,6 +3,7 @@
     <v-alert :value="generalError" type="error">{{ generalErrorMsg }}</v-alert>
     <TextWithValidationControl validators="required|email" type="email" v-model="form.email" label="Correo electrónico"/>
     <TextWithValidationControl validators="required|min-length:8" type="password" v-model="form.password" label="Contraseña"/>
+    <TextWithValidationControl :validators="'match-value:'+form.password" type="password" v-model="form.passwordConfirmation" label="Confirmar contraseña"/>
     <!-- TODO: This should have a wrapper component -->
     <v-radio-group v-model="form.role" label="Rol">
       <v-radio v-for="role in roles" :key="role" :value="role" :label="role"></v-radio>
@@ -32,6 +33,7 @@ export default class UserNewForm extends mixins(UserNewManager) {
   form = {
     email: '',
     password: '',
+    passwordConfirmation: '',
     role: this.roles[0]
   };
 
@@ -43,7 +45,8 @@ export default class UserNewForm extends mixins(UserNewManager) {
     const valid = form.validate();
     if (valid) {
       try {
-        const res = await this.createUser(this.form, { baseURL: process.env.VUE_APP_USERS_BASE_URL });
+        const { email, password, role } = this.form;
+        const res = await this.createUser({ email, password, role }, { baseURL: process.env.VUE_APP_USERS_BASE_URL });
         const user = res.data;
         this.addUsers({ users: [user] });
         this.$toast.success('Usuario creado exitosamente');
