@@ -2,25 +2,17 @@ import Vue from 'vue';
 import Component from 'vue-class-component';
 import { User } from 'lafabrika-resources';
 
-import { Response, RequestOptions, Requester, NetworkRequester } from '@/modules/http';
-
+import { Response, RequestOptions } from '@/modules/http';
 
 @Component
 export class UserListManager extends Vue {
-  requester: Requester;
-
-  constructor() {
-    super();
-    this.requester = new NetworkRequester();
-  }
-
   /**
    * Request users to API
    * @param options of the request
    */
   getUsers(options?: RequestOptions): Promise<Response<User[]>> {
     const path = '/admin/users';
-    return this.requester.get(path, options);
+    return this.$http.get(path, options);
   }
 
   /**
@@ -30,6 +22,6 @@ export class UserListManager extends Vue {
    */
   deleteUser(id: string, options?: RequestOptions): Promise<Response> {
     const path = `/admin/users/${id}`;
-    return this.requester.delete(path, options);
+    return this.$http.delete(path, options);
   }
 }

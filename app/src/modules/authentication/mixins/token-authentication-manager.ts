@@ -9,15 +9,13 @@ import { AuthenticationPayload } from '../classes/authentication-payload';
 
 @Component
 export class TokenAuthenticationManager extends Vue implements AuthenticationManager {
-  requester: Requester;
-
-  constructor() {
-    super();
-    this.requester = new NetworkRequester();
-  }
-
+  /**
+   * Authenticates a email-password combination
+   * @param payload to send
+   * @param options to set in th request
+   */
   authenticate(payload: AuthenticationPayload, options?: RequestOptions): Promise<Response<Authentication>> {
     const path = `/sign-in`;
-    return this.requester.post<Authentication>(path, payload, options);
+    return this.$http.post<Authentication>(path, payload, options);
   }
 }
