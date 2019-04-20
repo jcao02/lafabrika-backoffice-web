@@ -38,3 +38,6 @@ The global custom types are located in the `types` folder in the root.
 
 ### Module lafabrika-resources
 Module that defines the resources handled throghout the app. They're defined in `types/resources`.
+
+### Module lafabrika-patterns
+Module that defines software design patterns interfaces. They're defined in `types/patterns`.

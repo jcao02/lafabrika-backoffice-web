@@ -20,7 +20,8 @@
       "mocha",
       "chai",
       "vuetify",
-      "resources"
+      "resources",
+      "patterns"
     ],
     "paths": {
       "@/*": [
