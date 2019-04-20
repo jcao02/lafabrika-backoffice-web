@@ -1,5 +1,5 @@
 <template>
-  <v-list subheader>
+  <v-list subheader two-line>
     <v-subheader>Todos los usuarios</v-subheader>
 
     <template v-for="( user, index ) in users">
@@ -12,6 +12,7 @@
         </v-list-tile-avatar>
         <v-list-tile-content>
           <v-list-tile-title v-html="user.email"></v-list-tile-title>
+          <v-list-tile-sub-title v-html="user.role"></v-list-tile-sub-title>
         </v-list-tile-content>
         <v-list-tile-action>
           <v-btn flat :to="'/admin/users/edit/' +  user.id">
