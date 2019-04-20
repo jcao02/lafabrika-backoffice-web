@@ -41,7 +41,14 @@ export default class TextWithValidationControl extends Vue implements Control {
   errorsDictionary = defaultDictionary;
 
   get validatorObjects(): AbstractValidator[] {
-    return this.validators.split('|').map(v => ValidatorFactory.createValidator(v as ValidatorName));
+    return this.validators.split('|').map(v => {
+      if (v.indexOf(':') === -1)  {
+        return ValidatorFactory.createValidator(v as ValidatorName);
+      } else  {
+        const [vName, ...args] = v.split(':');
+        return ValidatorFactory.createValidator(vName as ValidatorName, args);
+      }
+    });
   }
 
   @Emit()
