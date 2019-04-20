@@ -1,4 +1,4 @@
-import { Prop, Vue, Component, Emit, Inject } from 'vue-property-decorator';
+import { Prop, Vue, Component, Emit, Inject, Watch } from 'vue-property-decorator';
 import { Observable } from '@/modules/shared/classes/observables/observable';
 import { Observer } from '@/modules/shared/classes/observables/observer';
 
@@ -24,6 +24,12 @@ export class AbstractControlComponent extends Vue implements Observable, Control
     touched: false
   };
   observers: Observer[] = [];
+
+  @Watch('value')
+  onValueUpdate(value: any) {
+    this.state = { ...this.state, value };
+    this.notify();
+  }
 
   created() {
     if (this.iObserver) {
