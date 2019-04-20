@@ -34,7 +34,7 @@ import { UserList } from '../components';
 import { UserListManager } from '../mixins';
 
 import { User } from '@/modules/shared/classes/resources/user';
-import { ADD_USERS, AddUsersPayload } from '@/modules/store/data-store/mutations';
+import { ADD_USERS, AddUsersPayload, DELETE_USER, DeleteUserPayload } from '@/modules/store/data-store/mutations';
 
 @Component({
   components: {
@@ -44,6 +44,7 @@ import { ADD_USERS, AddUsersPayload } from '@/modules/store/data-store/mutations
 export default class UserAdminPanel extends mixins(UserListManager) {
   @Getter('getAllUsers') users!: User[];
   @Mutation(ADD_USERS) addUsers!: (payload: AddUsersPayload) => void;
+  @Mutation(DELETE_USER) deleteUserStore!: (payload: DeleteUserPayload) => void;
 
   async created() {
     await this.fetchUsers();
@@ -64,6 +65,8 @@ export default class UserAdminPanel extends mixins(UserListManager) {
     if (window.confirm(`¿Estas seguro que quieres eliminar al usuario con ID = ${id}?`)) {
       try {
         const res = await this.deleteUser(id, { baseURL: process.env.VUE_APP_USERS_BASE_URL });
+        this.deleteUserStore({ userId: id });
+        this.$toast.success('Usuario eliminado exitosamente');
       } catch (err) {
         this.$toast.error('No se pudo eliminar el usuario. Intenta más tarde');
       }
