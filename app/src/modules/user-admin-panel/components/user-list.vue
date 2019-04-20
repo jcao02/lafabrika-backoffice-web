@@ -21,7 +21,7 @@
           </v-btn>
         </v-list-tile-action>
         <v-list-tile-action>
-          <v-btn class="user-action" flat>
+          <v-btn class="user-action" flat @click.prevent="() => deleteUser(user.id)">
             <v-icon color="primary">delete</v-icon>
           </v-btn>
         </v-list-tile-action>
@@ -32,12 +32,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Prop } from 'vue-property-decorator';
+import { Component, Vue, Prop, Emit } from 'vue-property-decorator';
 import { User } from '@/modules/shared/classes/resources/user';
 
 @Component
 export default class UserList extends Vue {
   @Prop() users!: User[];
+  @Emit()
+  deleteUser(id: string) {}
 }
 </script>
 
