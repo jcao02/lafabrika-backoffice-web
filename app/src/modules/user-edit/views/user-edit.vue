@@ -43,7 +43,7 @@ export default class UserEdit extends Vue {
 
     const { id } = to.params;
     try {
-      const res = await UserShowManager.getUser(id);
+      const res = await UserShowManager.getUser(id, { baseURL: process.env.VUE_APP_USERS_BASE_URL });
       const user = res.data;
       next(vm => vm.setUser(user));
     } catch (err) {
