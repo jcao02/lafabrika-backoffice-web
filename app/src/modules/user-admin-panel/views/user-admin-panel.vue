@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <v-layout row justify-center align-content-center>
-      <v-flex xs5>
+      <v-flex xs6>
         <UserList :users="users" />
       </v-flex>
       <v-spacer></v-spacer>
