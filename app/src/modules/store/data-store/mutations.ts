@@ -13,3 +13,17 @@ export function addUsers(state: DataState, payload: AddUsersPayload) {
 
   state.users = { ...state.users, ...usersState };
 }
+
+export const DELETE_USER = '[Data Store] Delete User';
+export interface DeleteUserPayload {
+  userId: string;
+}
+export function deleteUser(state: DataState, payload: DeleteUserPayload) {
+  const { userId } = payload;
+
+  const usersState = { ...state.users };
+  if (userId in usersState) {
+    delete usersState[userId];
+    state.users = usersState;
+  }
+}
