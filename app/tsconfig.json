@@ -21,7 +21,8 @@
       "chai",
       "vuetify",
       "resources",
-      "patterns"
+      "patterns",
+      "helpers"
     ],
     "paths": {
       "@/*": [

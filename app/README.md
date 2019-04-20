@@ -41,3 +41,6 @@ Module that defines the resources handled throghout the app. They're defined in 
 
 ### Module lafabrika-patterns
 Module that defines software design patterns interfaces. They're defined in `types/patterns`.
+
+### Module lafabrika-helpers
+Module that defines helper general types. They're defined in `types/helpers` ;
