@@ -1,4 +1,4 @@
-import { Prop, Vue, Component, Inject, Provide } from 'vue-property-decorator';
+import { Prop, Vue, Component, Inject, Provide, Watch } from 'vue-property-decorator';
 import { Observable } from '@/modules/shared/classes/observables/observable';
 import { Observer } from '@/modules/shared/classes/observables/observer';
 
@@ -28,6 +28,8 @@ export abstract class AbstractValidatorComponent extends Vue implements Observab
   @Prop() errorsDictionary!: ErrorMessagesDictionary;
   @Inject({ default: null }) readonly vObserver!: Observer | null;
   @Provide() iObserver: Observer = this;
+  @Watch('validators')
+  onValidatorsChange() { this.validate(); }
 
   /**
    * Validates the value provided
