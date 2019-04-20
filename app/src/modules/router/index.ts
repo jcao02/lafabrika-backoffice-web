@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import Component from 'vue-class-component';
 
 // Guards
 import { notSignedIn, signedIn, isAdmin } from './guards';
@@ -15,6 +16,12 @@ const UserNew = () => import('@/modules/user-new/views/user-new.vue');
 const UserEdit = () => import('@/modules/user-edit/views/user-edit.vue');
 
 Vue.use(Router);
+
+/** Register component hooks */
+Component.registerHooks([
+  'beforeRouteEnter'
+]);
+
 
 const router = new Router({
   mode: 'history',
