@@ -38,3 +38,8 @@ Object that represents a response error, i.e, different from `2xx`:
 
 ### NetworkRequester
 Class that implements `Requester` interface and makes HTTP network requests using [axios](https://github.com/axios/axios) library
+
+## Plugins
+
+### NetworkRequesterPlugin
+This plugin adds a `$http` property to the Vue class to make network requests.

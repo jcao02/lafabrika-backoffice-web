@@ -22,7 +22,8 @@
       "vuetify",
       "resources",
       "patterns",
-      "helpers"
+      "helpers",
+      "plugins"
     ],
     "paths": {
       "@/*": [
