@@ -62,7 +62,6 @@ export default class UserEditForm extends mixins(UserEditManager) {
         const user = res.data;
         this.addUsers({ users: [user] });
         this.$toast.success('Usuario actualizado exitosamente');
-        this.$router.push('/admin');
       } catch (err) {
         const { response } = err;
         const errorMsg = response.status === 409
