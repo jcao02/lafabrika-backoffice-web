@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-import { Requester } from './requester';
-import { Response } from './response';
-import { RequestOptions } from './request-options';
+import { Requester } from '../interfaces/requester';
+import { Response } from '../interfaces/response';
+import { RequestOptions } from '../interfaces/request-options';
 
 export class NetworkRequester implements Requester {
 
