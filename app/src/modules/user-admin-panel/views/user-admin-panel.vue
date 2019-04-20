@@ -33,7 +33,7 @@ import { Mutation, Getter } from 'vuex-class';
 import { UserList } from '../components';
 import { UserListManager } from '../mixins';
 
-import { User } from '@/modules/shared/classes/resources/user';
+import { User } from 'lafabrika-resources';
 import { ADD_USERS, AddUsersPayload, DELETE_USER, DeleteUserPayload } from '@/modules/store/data-store/mutations';
 
 @Component({

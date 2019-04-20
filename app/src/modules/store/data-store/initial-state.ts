@@ -1,5 +1,6 @@
+import { User } from 'lafabrika-resources';
+
 import { TokenManager } from '@/modules/authentication/mixins/token-manager';
-import { User } from '@/modules/shared/classes/resources/user';
 import { DataState } from './state';
 
 /**

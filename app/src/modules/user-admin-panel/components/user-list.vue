@@ -33,7 +33,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator';
-import { User } from '@/modules/shared/classes/resources/user';
+import { User } from 'lafabrika-resources';
 
 @Component
 export default class UserList extends Vue {

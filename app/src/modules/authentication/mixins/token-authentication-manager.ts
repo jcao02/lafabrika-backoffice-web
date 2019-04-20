@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { Authentication } from '@/modules/shared/classes/resources/authentication';
+import { Authentication } from 'lafabrika-resources';
+
 import { RequestOptions, Requester, Response, NetworkRequester } from '@/modules/http';
 
 import { AuthenticationManager } from '../classes/authentication-manager';

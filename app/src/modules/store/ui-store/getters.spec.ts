@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { User } from '@/modules/shared/classes/resources/user';
+import { User } from 'lafabrika-resources';
 import { UIState } from './state';
 import { getCurrentUser } from './getters';
 

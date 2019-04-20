@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
+import { User } from 'lafabrika-resources';
 
 import { Response, RequestOptions, Requester, NetworkRequester } from '@/modules/http';
 
-import { User } from '@/modules/shared/classes/resources/user';
 
 @Component
 export class UserListManager extends Vue {

@@ -1,4 +1,4 @@
-import { Authentication } from '@/modules/shared/classes/resources/authentication';
+import { Authentication } from 'lafabrika-resources';
 import { RequestOptions, Response } from '@/modules/http';
 import { AuthenticationPayload } from './authentication-payload';
 

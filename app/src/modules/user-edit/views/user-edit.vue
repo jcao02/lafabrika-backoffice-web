@@ -23,10 +23,11 @@
 <script lang="ts">
 import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
+import { User } from 'lafabrika-resources';
+
 import { UserEditForm } from '../components';
 import { UserShowManager } from '../classes';
 import { Route, RawLocation } from 'vue-router';
-import { User } from '@/modules/shared/classes/resources/user';
 
 @Component({
   components: {

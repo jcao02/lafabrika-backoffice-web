@@ -15,11 +15,11 @@ import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
 import { Prop, Watch } from 'vue-property-decorator';
 import { Mutation } from 'vuex-class';
+import { User } from 'lafabrika-resources';
 
 import { UserEditManager } from '../mixins';
 
 import { FormWithValidation, TextWithValidationControl } from '@/modules/forms';
-import { User } from '@/modules/shared/classes/resources/user';
 import { ADD_USERS, AddUsersPayload } from '@/modules/store/data-store/mutations';
 
 @Component({

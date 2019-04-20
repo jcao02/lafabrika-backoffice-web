@@ -1,4 +1,4 @@
-import { User } from '@/modules/shared/classes/resources/user';
+import { User } from 'lafabrika-resources';
 import { DataState } from './state';
 
 export const ADD_USERS = '[Data Store] Add Users';

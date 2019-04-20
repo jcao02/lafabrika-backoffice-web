@@ -1,4 +1,4 @@
-import { User } from '@/modules/shared/classes/resources/user';
+import { User } from 'lafabrika-resources';
 
 export interface DataState {
   users: Record<string, User>;
