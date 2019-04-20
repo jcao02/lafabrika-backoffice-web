@@ -25,4 +25,14 @@ export class UserListManager extends Vue {
     const path = '/admin/users';
     return this.requester.get(path, options);
   }
+
+  /**
+   * Deletes a user
+   * @param id of the user
+   * @param options of the request
+   */
+  deleteUser(id: string, options?: RequestOptions): Promise<Response> {
+    const path = `/admin/users/${id}`;
+    return this.requester.delete(path, options);
+  }
 }
