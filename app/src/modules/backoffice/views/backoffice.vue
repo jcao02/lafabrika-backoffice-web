@@ -1,6 +1,6 @@
 <template>
 <div class="dashboard-container">
-  <ToolBar :isAdmin="isAdmin()" @sign-out="onSignOut"/>
+  <ToolBar @sign-out="onSignOut"/>
   <NavigationDrawer :isAdmin="isAdmin()"/>
   <!-- Children routes -->
   <router-view/>
