@@ -1,9 +1,13 @@
 <template>
 <div class="dashboard-container">
   <ToolBar @sign-out="onSignOut"/>
-  <NavigationDrawer :isAdmin="isAdmin()"/>
-  <!-- Children routes -->
-  <router-view/>
+  <v-layout row>
+    <v-flex fill-height class="nav-drawer-container">
+      <NavigationDrawer class="nav-drawer" :isAdmin="isAdmin()"/>
+    </v-flex>
+    <!-- Children routes -->
+    <router-view/>
+  </v-layout>
 </div>
 </template>
 
@@ -44,3 +48,9 @@ export default class Backoffice extends mixins(TokenManager, CurrentUserManagerM
 
 </script>
 
+
+<style>
+.nav-drawer-container {
+  max-width: 300px;
+}
+</style>
