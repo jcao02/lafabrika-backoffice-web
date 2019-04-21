@@ -1,4 +1,6 @@
 import Vue from 'vue';
-import { NetworkRequesterPlugin } from '@/modules/http';
+import { NetworkRequesterPlugin, NetworkRequester } from '@/modules/http';
 
-Vue.use(NetworkRequesterPlugin);
+Vue.use(NetworkRequesterPlugin, {
+  Requester: NetworkRequester
+});
