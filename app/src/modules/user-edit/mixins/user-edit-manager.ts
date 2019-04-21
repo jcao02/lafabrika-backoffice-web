@@ -3,18 +3,11 @@ import Component from 'vue-class-component';
 import { User } from 'lafabrika-resources';
 import { Omit } from 'lafabrika-helpers';
 
-import { RequestOptions, Response, Requester, NetworkRequester } from '@/modules/http';
+import { RequestOptions, Response } from '@/modules/http';
 
 
 @Component
 export class UserEditManager extends Vue {
-  requester: Requester;
-
-  constructor() {
-    super();
-    this.requester = new NetworkRequester();
-  }
-
   /**
    * Updates a user
    * @param id of the user
@@ -27,6 +20,6 @@ export class UserEditManager extends Vue {
     options?: RequestOptions
   ): Promise<Response<User>> {
     const path = `/admin/users/${id}`;
-    return this.requester.patch(path, payload, options);
+    return this.$http.patch(path, payload, options);
   }
 }
