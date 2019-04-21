@@ -1,13 +1,7 @@
 <template>
-<div class="dashboard-contai">
-  <v-toolbar>
-    <v-toolbar-title> La Fábrika </v-toolbar-title>
-    <v-spacer></v-spacer>
-    <v-toolbar-items>
-      <v-btn v-if="isAdmin()" to="/admin" flat>Panel Administración</v-btn>
-      <v-btn @click="onSignOut" flat>Salir</v-btn>
-    </v-toolbar-items>
-  </v-toolbar>
+<div class="dashboard-container">
+  <ToolBar :isAdmin="isAdmin()" @sign-out="onSignOut"/>
+  <NavigationDrawer :isAdmin="isAdmin()"/>
   <!-- Children routes -->
   <router-view/>
 </div>
@@ -19,6 +13,8 @@ import Component, { mixins } from 'vue-class-component';
 import { Mutation, Getter } from 'vuex-class';
 import { User } from 'lafabrika-resources';
 
+import { NavigationDrawer, ToolBar } from '../components';
+
 // Mixins
 import { CurrentUserManagerMixin } from '@/modules/shared/classes/state/current-user-manager-mixin';
 import { TokenManager } from '@/modules/authentication/mixins/token-manager';
@@ -27,7 +23,12 @@ import { TokenManager } from '@/modules/authentication/mixins/token-manager';
 import { SET_CURRENT_USER, SetCurrentUserPayload } from '@/modules/store/ui-store/mutations';
 
 
-@Component
+@Component({
+  components: {
+    NavigationDrawer,
+    ToolBar
+  }
+})
 export default class Backoffice extends mixins(TokenManager, CurrentUserManagerMixin) {
   @Mutation(SET_CURRENT_USER) setCurrentUser!: (payload: SetCurrentUserPayload) => void;
 
