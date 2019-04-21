@@ -58,6 +58,7 @@ export default class AuthenticationForm extends mixins(TokenAuthenticationManage
           this.handleUser(userOrNull);
           this.persistToken(token);
           this.$router.push({ path: '/' });
+          this.$toast.success('Inicio de sesión exitoso');
         } else {
           const errorMsg = 'Algo inesperado ocurrió, vuelve a intentar más tarde';
           this.setError(errorMsg);
