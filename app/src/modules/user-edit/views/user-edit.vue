@@ -4,7 +4,10 @@
       <v-icon>arrow_back</v-icon>
     </v-btn>
     <v-container>
-      <v-layout column justify-center align-center align-content-center>
+      <v-layout column justify-center align-content-center>
+        <v-btn fab flat color="primary" to="/admin">
+          <v-icon>arrow_back</v-icon>
+        </v-btn>
         <!-- Card containing form -->
         <v-card class="card" width="400">
           <!-- Center card content -->
@@ -72,12 +75,11 @@ export default class UserEdit extends Vue {
 
 <style scoped>
 .back-btn {
-  margin-top: 16px;
-  margin-left: 316px;
+  margin: 16px 0 0 16px;
 }
 .card {
-  margin-top: 32px;
   padding-bottom: 32px;
+  align-self: center;
 }
 .form-container {
   padding: 0 32px;
