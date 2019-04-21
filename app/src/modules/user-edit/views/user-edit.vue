@@ -5,9 +5,6 @@
     </v-btn>
     <v-container>
       <v-layout column justify-center align-content-center>
-        <v-btn fab flat color="primary" to="/admin">
-          <v-icon>arrow_back</v-icon>
-        </v-btn>
         <!-- Card containing form -->
         <v-card class="card" width="400">
           <!-- Center card content -->
