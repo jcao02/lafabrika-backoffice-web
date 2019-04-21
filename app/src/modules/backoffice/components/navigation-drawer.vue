@@ -57,7 +57,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
 
@@ -66,8 +66,9 @@ export default class NavigationDrawer extends Vue {
   @Prop() isAdmin!: boolean;
 
   admins = [
-    ['Lista de Usuarios', 'people_outline', '/admin'],
-  ]
+    ['Añadir Usuario', 'add', '/admin/users/new'],
+    ['Lista de Usuarios', 'people_outline', '/admin']
+  ];
 }
 </script>
 

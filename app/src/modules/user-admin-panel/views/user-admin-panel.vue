@@ -19,6 +19,12 @@
           <v-card-text>
             Esto es únicamente visible para los administradores
           </v-card-text>
+          <v-card-text>
+            <v-btn class="add-btn" color="primary" to="/admin/users/new">
+              <v-icon>add</v-icon>
+              Añadir usuario
+            </v-btn>
+          </v-card-text>
         </v-card>
       </v-flex>
     </v-layout>
@@ -74,3 +80,11 @@ export default class UserAdminPanel extends mixins(UserListManager) {
   }
 }
 </script>
+
+
+<style>
+.add-btn {
+  width: 100%;
+  margin: 0;
+}
+</style>
