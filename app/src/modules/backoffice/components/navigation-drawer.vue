@@ -1,5 +1,5 @@
 <template>
- <v-navigation-drawer permanent absolute>
+ <v-navigation-drawer clipped app>
   <v-toolbar flat>
     <v-list>
       <v-list-tile>
