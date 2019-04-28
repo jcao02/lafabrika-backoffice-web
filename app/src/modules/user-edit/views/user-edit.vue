@@ -22,7 +22,9 @@
             </v-card-title>
             <!-- Form -->
             <v-card-text class="form-container">
-              <UserEditForm :user="user"/>
+              <keep-alive>
+                <component :is="currentFormComponent" v-bind="currentFormProps"></component>
+              </keep-alive>
             </v-card-text>
           </v-layout>
         </v-card>
@@ -36,7 +38,7 @@ import Vue from 'vue';
 import Component, { mixins } from 'vue-class-component';
 import { User } from 'lafabrika-resources';
 
-import { UserEditForm } from '../components';
+import { UserEditForm, PasswordEditForm } from '../components';
 import { UserShowManager } from '../classes';
 import { Route, RawLocation } from 'vue-router';
 
@@ -83,11 +85,25 @@ export default class UserEdit extends Vue {
   get formTitle() {
     switch (this.activeTab) {
       case FormTab.PASSWORD:
-        return 'Cambiar Contraseña'
+        return 'Cambiar Contraseña';
       case FormTab.BASIC:
       default:
         return 'Editar Usuario';
     }
+  }
+
+  get currentFormComponent() {
+    switch (this.activeTab) {
+      case FormTab.PASSWORD:
+        return PasswordEditForm;
+      case FormTab.BASIC:
+      default:
+        return UserEditForm;
+    }
+  }
+
+  get currentFormProps() {
+    return { user: this.user };
   }
 }
 </script>
