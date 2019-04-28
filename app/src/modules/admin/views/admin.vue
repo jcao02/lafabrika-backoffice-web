@@ -12,3 +12,9 @@ import Component from 'vue-class-component';
 @Component
 export default class Admin extends Vue {}
 </script>
+
+<style>
+.admin {
+  flex-grow: 1;
+}
+</style>
