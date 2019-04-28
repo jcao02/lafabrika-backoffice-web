@@ -31,7 +31,7 @@ export class UserEditManager extends Vue {
    */
   updatePassword(
     id: string,
-    payload: { currentPassword: string, newPassword: string },
+    payload: { newPassword: string },
     options?: RequestOptions
   ): Promise<Response<void>> {
     const path = `/admin/user-private-informations/${id}`;

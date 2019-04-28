@@ -1,7 +1,6 @@
 <template>
   <FormWithValidation ref="form" @submit.prevent="onSubmit" v-slot="{ valid }">
     <v-alert :value="generalError" type="error">{{ generalErrorMsg }}</v-alert>
-    <TextWithValidationControl validators="required" type="password" v-model="form.currentPassword" label="Contraseña Actual"/>
     <TextWithValidationControl validators="required|min-length:8" type="password" v-model="form.newPassword" label="Contraseña Nueva"/>
     <v-btn class="submit-btn" :disabled="!valid" type="submit" color="primary">Enviar</v-btn>
   </FormWithValidation>
@@ -28,8 +27,7 @@ import { ADD_USERS, AddUsersPayload } from '@/modules/store/data-store/mutations
 export default class PasswordEditForm extends mixins(UserEditManager) {
   @Prop() user!: User | null;
   form = {
-    currentPassword: '',
-    newPassword: '',
+    newPassword: ''
   };
 
   generalError = false;
