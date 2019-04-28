@@ -1,8 +1,14 @@
 <template>
   <div class="user-edit">
-    <v-btn class="back-btn" fab flat color="primary" to="/admin">
-      <v-icon>arrow_back</v-icon>
-    </v-btn>
+    <v-layout class="inner-navigation" row align-center>
+      <v-btn class="back-btn" fab flat color="primary" to="/admin">
+        <v-icon>arrow_back</v-icon>
+      </v-btn>
+      <v-tabs class="navigation-tabs" v-model="activeTab">
+        <v-tab key="basic">Información Básica</v-tab>
+        <v-tab key="password">Cambiar Contraseña</v-tab>
+      </v-tabs>
+    </v-layout>
     <v-container>
       <v-layout column justify-center align-content-center>
         <!-- Card containing form -->
@@ -12,7 +18,7 @@
             <v-img width="100%" :src="require('@/assets/guernica.jpg')"></v-img>
             <!-- Card title -->
             <v-card-title primary-title>
-              <h1>Editar Usuario</h1>
+              <h1>{{ formTitle }}</h1>
             </v-card-title>
             <!-- Form -->
             <v-card-text class="form-container">
@@ -34,6 +40,11 @@ import { UserEditForm } from '../components';
 import { UserShowManager } from '../classes';
 import { Route, RawLocation } from 'vue-router';
 
+enum FormTab {
+  BASIC = 0,
+  PASSWORD = 1
+}
+
 @Component({
   components: {
     UserEditForm
@@ -41,6 +52,7 @@ import { Route, RawLocation } from 'vue-router';
 })
 export default class UserEdit extends Vue {
   user: User | null = null;
+  activeTab: FormTab = FormTab.BASIC;
 
   async beforeRouteEnter(
     to: Route,
@@ -67,12 +79,25 @@ export default class UserEdit extends Vue {
   setUser(user: User) {
     this.user = user;
   }
+
+  get formTitle() {
+    switch (this.activeTab) {
+      case FormTab.PASSWORD:
+        return 'Cambiar Contraseña'
+      case FormTab.BASIC:
+      default:
+        return 'Editar Usuario';
+    }
+  }
 }
 </script>
 
 <style scoped>
-.back-btn {
+.inner-navigation {
   margin: 16px 0 0 16px;
+}
+.navigation-tabs {
+  margin-left: 16px;
 }
 .card {
   padding-bottom: 32px;
