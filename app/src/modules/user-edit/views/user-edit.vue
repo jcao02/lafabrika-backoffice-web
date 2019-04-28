@@ -23,7 +23,7 @@
             <!-- Form -->
             <v-card-text class="form-container">
               <keep-alive>
-                <component :is="currentFormComponent" v-bind="currentFormProps"></component>
+                <component :is="formComponent" v-bind="formProps"></component>
               </keep-alive>
             </v-card-text>
           </v-layout>
@@ -92,7 +92,7 @@ export default class UserEdit extends Vue {
     }
   }
 
-  get currentFormComponent() {
+  get formComponent() {
     switch (this.activeTab) {
       case FormTab.PASSWORD:
         return PasswordEditForm;
@@ -102,7 +102,7 @@ export default class UserEdit extends Vue {
     }
   }
 
-  get currentFormProps() {
+  get formProps() {
     return { user: this.user };
   }
 }
